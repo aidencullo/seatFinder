@@ -1,0 +1,14 @@
+<%= form_with model: [ @movie, @movie.showings.build ] do |form| %>
+<p>
+  <%= form.label :date %><br>
+  <%= form.date_field :date %>
+</p>
+<p>
+  <%= form.label :time %><br>
+  <%= form.time_select :time %>
+</p>
+  <%= @movie.errors.messages %>
+<p>
+  <%= form.submit %>
+</p>
+<% end %>

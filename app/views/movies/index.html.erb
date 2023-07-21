@@ -1,0 +1,21 @@
+<h1>Movies</h1>
+
+<ul>
+  <% @movies.each do |movie| %>
+  <li>
+    <%= link_to movie.title, movie_path(movie) %>
+  </li>
+  <% end %>
+</ul>
+
+
+<p>
+  <strong>
+    Add a movie:
+  </strong>
+  <%= link_to "New", new_movie_path(@movie) %>
+
+  <%= form_with url: "/movies", method: :delete do |form| %>
+  <%= form.submit "delete all" %>
+<% end %>
+</p>

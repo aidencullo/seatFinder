@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root 'movies#index'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get 'home', to: 'pages#home' , as: 'nickname'
+
+  delete 'movies', to: 'movies#destroy_all'
+  get 'nothing', to: 'movies#print'
+
+  resources :movies do
+    resources :showings
+  end
+  
+  get '*other', to: 'application#unknown'
 end

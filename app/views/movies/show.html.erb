@@ -1,0 +1,19 @@
+<h1>
+  <strong>Title:</strong>
+  <%= @movie.title %>
+</h1>
+
+<ul>
+  <li><%= link_to "Edit", edit_movie_path(@movie) %></li>
+  <li><%= link_to "Destroy", movie_path(@movie), data: {
+          turbo_method: :delete,
+          turbo_confirm: "Are you sure?"
+          } %></li>
+</ul>
+
+
+<h2>Showings</h2>
+<%= render @movie.showings %>
+
+<h2>Add a showing:</h2>
+<%= render 'showings/form' %>
