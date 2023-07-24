@@ -1,14 +1,23 @@
-<%= form_with model: [ @movie, @movie.showings.build ] do |form| %>
-<p>
-  <%= form.label :date %><br>
-  <%= form.date_field :date %>
-</p>
-<p>
-  <%= form.label :time %><br>
-  <%= form.time_select :time %>
-</p>
-  <%= @movie.errors.messages %>
-<p>
+<%= form_with(model: showing) do |form| %>
+<% if showing.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(showing.errors.count, "error") %> prohibited this showing from being saved: 
+  </h2>
+
+  <ul>
+    <% showing.errors.each do |error| %>
+    <li><%= error.full_message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= form.hidden_field :movie_id %>
+
+<%= form.label :date, "date:" %>
+<%= form.text_area :date %>
+
+<div class="actions">
   <%= form.submit %>
-</p>
+</div>
 <% end %>

@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
+  resources :comments
+  resources :posts
   root 'movies#index'
 
-  get 'home', to: 'pages#home' , as: 'nickname'
+  get 'home', to: 'pages#home'
 
   delete 'movies', to: 'movies#destroy_all'
-  get 'nothing', to: 'movies#print'
 
-  resources :movies do
-    resources :showings
-  end
+  resources :movies
+  resources :showings
   
   get '*other', to: 'application#unknown'
 end
