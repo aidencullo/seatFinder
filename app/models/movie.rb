@@ -1,4 +1,4 @@
 class Movie < ApplicationRecord
   has_many :showings, dependent: :destroy
-  validates :title, presence: true
+  validates_presence_of :title
 end

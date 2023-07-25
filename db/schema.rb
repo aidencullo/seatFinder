@@ -10,14 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_23_172644) do
-  create_table "comments", force: :cascade do |t|
-    t.integer "post_id"
-    t.text "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
+ActiveRecord::Schema[7.0].define(version: 2023_07_25_180817) do
   create_table "movies", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -31,19 +24,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_23_172644) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.text "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "showings", force: :cascade do |t|
-    t.string "date"
+    t.datetime "date", precision: nil
     t.integer "movie_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.time "time"
     t.index ["movie_id"], name: "index_showings_on_movie_id"
   end
 
