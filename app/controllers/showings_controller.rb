@@ -8,7 +8,6 @@ class ShowingsController < ApplicationController
   # POST /showings or /showings.json
   def create
     @showing = Showing.new(showing_params)
-    puts "params #{showing_params}"
     
     respond_to do |format|
       if @showing.save

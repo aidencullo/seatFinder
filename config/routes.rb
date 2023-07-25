@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :comments
-  resources :posts
   root 'movies#index'
 
   get 'home', to: 'pages#home'
