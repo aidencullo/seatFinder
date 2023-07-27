@@ -1,0 +1,7 @@
+<% if component.errors.any? %>
+<p class="text-red-500">
+  <% component.errors.each do |error| %>
+  <%= error.full_message %>
+  <% end %>
+</p>
+<% end %>
