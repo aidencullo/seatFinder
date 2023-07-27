@@ -1,23 +1,9 @@
 <%= form_with(model: showing) do |form| %>
-<% if showing.errors.any? %>
-<div id="error_explanation">
-  <h2><%= pluralize(showing.errors.count, "error") %> prohibited this showing from being saved: 
-  </h2>
-
-  <ul>
-    <% showing.errors.each do |error| %>
-    <li><%= error.full_message %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
-
+<%= render "layouts/error", :component => showing %>
 <%= form.hidden_field :movie_id %>
-
 <%= form.label :date, "date:" %>
 <%= form.date_field :date %>
-
-<div class="actions">
-  <%= form.submit %>
-</div>
+<%= render "layouts/button" do %>
+<%= form.submit %>
+<% end %>
 <% end %>

@@ -1,13 +1,14 @@
-<%= form_with model: movie do |form| %>
-<p>
-  <%= form.label :title %><br>
-  <%= form.text_area :title %>
-  <% @movie.errors.full_messages_for(:title).each do |message| %>
-  <div><%= message %></div>
-  <% end %>
-</p>
-
-<p>
+<%= render "layouts/form", model: movie do |form| %>
+<div class="flex flex-col border-2 p-2 m-2">
+  <div class="mx-auto border-2 p-2 m-2 font-bold">
+    <%= form.label :title %>
+  </div>
+  <div class="flex flex-col border-2 p-2 m-2">
+    <%= form.text_area :title %>
+  </div>
+  <%= render "layouts/error", :component => @movie %>
+  <%= render "layouts/button" do %>
   <%= form.submit %>
-</p>
+  <% end %>
+</div>
 <% end %>

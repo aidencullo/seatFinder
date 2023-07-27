@@ -1,9 +1,5 @@
 <% if showing.id %>
-<h3> showing <%= showing.id %> </h3>
-<p>
-  Date: <%= showing.date.to_date.to_formatted_s(:long_ordinal) %>
-</p>
-<p>
-  Time: <%= showing.date.to_s(:time) %>
-</p>
+showing <%= showing.id %>
+Date: <%= showing.date.to_date.to_formatted_s(:long_ordinal) %>
+Time: <%= showing.date.to_s(:time) %>
 <% end %>

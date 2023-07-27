@@ -3,18 +3,17 @@
     <h1 class="text-2xl border-2 p-2">Movies</h1>
     <%= render(@movies) || "There are no movies available." %>
   </div>
+      <div class="test">
+      dkjs
+    </div>
+
   <div class="flex flex-col gap-2">
-
-    <%= link_to new_movie_path(@movie) do %>
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      add a movie
-    </button>
+    <%= render "layouts/link_button", :link => new_movie_path(@movie), :label =>
+    "add movie"%>
+    <%= render "layouts/button" do %>
+    <%= form_with(url: movies_path, method: :delete) do |form| %>
+    <%= form.submit "delete all" %>
     <% end %>
-
-    <%= form_with url: "/movies", method: :delete do |form| %>
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-      <%= form.submit "delete all" %>
-      <% end %>
-    </button>
+    <% end %>
   </div>
 </div>

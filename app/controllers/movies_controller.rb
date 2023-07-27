@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+
+  
   def index
     @movies = Movie.all
   end
@@ -47,7 +49,7 @@ class MoviesController < ApplicationController
     @movies = Movie.destroy_all
     redirect_to root_path, status: :see_other
   end
-  
+
   def print
     puts params
     redirect_to root_path, status: :see_other
