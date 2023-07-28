@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+Page.destroy_all
+Page.create!([{
+  title: "Home",
+  body: "This is the home page",
+}])
+p "Created #{Page.count} Pages"

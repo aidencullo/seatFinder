@@ -3,10 +3,6 @@
     <h1 class="text-2xl border-2 p-2">Movies</h1>
     <%= render(@movies) || "There are no movies available." %>
   </div>
-      <div class="test">
-      dkjs
-    </div>
-
   <div class="flex flex-col gap-2">
     <%= render "layouts/link_button", :link => new_movie_path(@movie), :label =>
     "add movie"%>

@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    # @page = Page.find(1)
+    # temporary fix -- id may change
+    @page = Page.find(2)
   end
-
 end

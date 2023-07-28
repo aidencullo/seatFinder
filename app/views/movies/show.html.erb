@@ -13,7 +13,7 @@
   </div>
   <h2>Showings:</h2>
   <ul class="flex flex-col border-2 p-4 m-2">
-    <li><%= render @movie.showings %></li>
-    <li><%= render 'showings/form', showing: @showing%></li>
+    <%= render @movie.showings %>
+    <%= render 'showings/form', showing: @showing%>
   </ul>
 </div>
