@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   root 'movies#index'
   
-  get 'home', to: 'pages#home'
+  # get 'home', to: 'pages#home'
+  get 'home', to: 'movies#index'
 
   delete 'movies', to: 'movies#destroy_all'
 
