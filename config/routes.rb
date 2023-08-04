@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   
   # get 'home', to: 'pages#home'
   get 'home', to: 'movies#index'
+  get 'admin', to: 'application#admin'
 
   delete 'movies', to: 'movies#destroy_all'
 
