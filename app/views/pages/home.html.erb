@@ -3,10 +3,9 @@
         <%= render(PanelsComponent.new()) do %>
             <%= render(PanelComponent.new(title: "events")) do %>
                 <ul>
-                    <% [1,2,3].each do |event| %>
+                    <% @events.each do |event| %>
                         <li>
-                            event link here
-                            <%#= link_to event.title, event %>
+                            <%= link_to event.id, event %>
                         </li>
                     <% end %>
                 </ul>

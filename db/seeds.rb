@@ -6,9 +6,16 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-Page.destroy_all
-Page.create!([{
-  title: "Home",
-  body: "This is the home page",
-}])
-p "Created #{Page.count} Pages"
+Company.destroy_all
+Customer.destroy_all
+Venue.destroy_all
+Event.destroy_all
+Ticket.destroy_all
+
+Company.create
+Customer.create
+Venue.create
+Event.create(venue_id:1, company_id:1)
+Event.create(venue_id:1, company_id:1)
+Event.create(venue_id:1, company_id:1)
+Ticket.create(event_id:1, customer_id:1)

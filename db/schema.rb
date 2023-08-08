@@ -14,17 +14,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_152959) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "addresses", force: :cascade do |t|
-    t.string "city"
-    t.bigint "user_id", null: false
+  create_table "companies", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
-  create_table "documents", force: :cascade do |t|
+  create_table "customers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.bigint "venue_id", null: false
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_events_on_company_id"
+    t.index ["venue_id"], name: "index_events_on_venue_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -34,36 +40,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_152959) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "paragraphs", force: :cascade do |t|
-    t.bigint "section_id", null: false
+  create_table "tickets", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.bigint "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["section_id"], name: "index_paragraphs_on_section_id"
+    t.index ["customer_id"], name: "index_tickets_on_customer_id"
+    t.index ["event_id"], name: "index_tickets_on_event_id"
   end
 
-  create_table "sections", force: :cascade do |t|
-    t.bigint "document_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["document_id"], name: "index_sections_on_document_id"
-  end
-
-  create_table "tasks", force: :cascade do |t|
-    t.string "name"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_tasks_on_user_id"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "email"
+  create_table "venues", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "addresses", "users"
-  add_foreign_key "paragraphs", "sections"
-  add_foreign_key "sections", "documents"
-  add_foreign_key "tasks", "users"
+  add_foreign_key "events", "companies"
+  add_foreign_key "events", "venues"
+  add_foreign_key "tickets", "customers"
+  add_foreign_key "tickets", "events"
 end
