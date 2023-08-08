@@ -64,6 +64,9 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  gem "launchy", "~> 2.5"
+  
 end
 
 group :test do
