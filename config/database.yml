@@ -23,13 +23,13 @@ default: &default
 
 development:
   <<: *default
-  database: aiden_app_development
+  database: seatFinder_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: aiden_app
+  #username: seatFinder
 
   # The password associated with the postgres role (username).
   #password:
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: aiden_app_test
+  database: seatFinder_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,14 +81,6 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
-#
-# Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
-# for a full overview on how database connection configuration can be specified.
-#
-production:
-  <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
-  database: my_app_render_production
-  username: my_app_render
-  password: <%= ENV['MY_APP_RENDER_DATABASE_PASSWORD'] %>
+  database: seatFinder_production
+  username: seatFinder
+  password: <%= ENV["SEATFINDER_DATABASE_PASSWORD"] %>
