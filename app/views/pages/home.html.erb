@@ -1,14 +1,15 @@
 <%= render(PageComponent.new()) do  %>
     <%= render(ContentComponent.new(title: "admin")) do %>
         <%= render(PanelsComponent.new()) do %>
-            <%= render(PanelComponent.new(title: "panel")) do %>
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum." 
+            <%= render(PanelComponent.new(title: "events")) do %>
+                <ul>
+                    <% [1,2,3].each do |event| %>
+                        <li>
+                            event link here
+                            <%#= link_to event.title, event %>
+                        </li>
+                    <% end %>
+                </ul>
             <% end %>
         <% end %>
     <% end %>
