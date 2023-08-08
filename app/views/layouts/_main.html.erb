@@ -1,9 +1,11 @@
-<main class="flex flex-col h-screen justify-between">
+<main class="flex flex-col justify-between min-h-screen">
   <div>
     <%= render "layouts/navbar" %>
   </div>
   <div class="h-full flex justify-center items-center">
     <%= yield %>
   </div>
-  <%= render "layouts/footer" %>
+  <div>
+    <%= render "layouts/footer" %>
+  </div>
 </main>
