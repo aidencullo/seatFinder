@@ -1,14 +1,12 @@
 <header>
   <nav class="bg-gray-700 text-white">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-      <%= link_to home_path, class: "flex items-center" do %>
+      <%= link_to root_url, class: "flex items-center" do %>
       <%=  image_tag "theatre_camera.png", class: "h-8 mr-3", alt: "camera" %>
       <span class="self-center text-2xl font-semibold">SeatFinder</span>
       <% end %>
       <ul class="font-medium flex space-x-8">
-        <li><%= link_to "Admin", admin_path %></li>
-        <li><%= link_to "Home", home_path %></li>
-        <li><%= link_to "Movies", movies_path %></li>
+        <li><%= link_to "Home", root_url %></li>
       </ul>
     </div>
   </nav>

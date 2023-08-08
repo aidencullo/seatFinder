@@ -1,9 +1,0 @@
-<%= form_with(model: showing) do |form| %>
-<%= render "layouts/error", :component => showing %>
-<%= form.hidden_field :movie_id %>
-<%= form.label :date, "date:" %>
-<%= form.date_field :date %>
-<%= render "layouts/button" do %>
-<%= form.submit %>
-<% end %>
-<% end %>
