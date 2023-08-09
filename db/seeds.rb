@@ -15,6 +15,8 @@ Ticket.destroy_all
 Company.create
 Customer.create
 Venue.create
+Venue.create
+Venue.create
 Event.create(venue_id:1, company_id:1)
 Event.create(venue_id:1, company_id:1)
 Event.create(venue_id:1, company_id:1)
