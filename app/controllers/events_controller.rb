@@ -8,6 +8,7 @@ class EventsController < ApplicationController
 
   # GET /events/1 or /events/1.json
   def show
+    @company = @event.company
   end
 
   # GET /events/new
@@ -23,7 +24,7 @@ class EventsController < ApplicationController
   def create
     @company = Company.find(params[:company_id])
     @event = @company.events.create(event_params)
-    redirect_to company_path(@company)
+    redirect_to @event
   end
 
   # PATCH/PUT /events/1 or /events/1.json
@@ -41,10 +42,11 @@ class EventsController < ApplicationController
 
   # DELETE /events/1 or /events/1.json
   def destroy
+    @company = @event.company
     @event.destroy
 
     respond_to do |format|
-      format.html { redirect_to events_url, notice: "Event was successfully destroyed." }
+      format.html { redirect_to @company, notice: "Event was successfully destroyed." }
       format.json { head :no_content }
     end
   end
