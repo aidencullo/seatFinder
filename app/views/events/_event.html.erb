@@ -1,8 +1,8 @@
 <div id="<%= dom_id event %>">
     Event: <%= event.id %> Venue: <%= event.venue_id %>
     <div class="grid grid-cols-10 border-2">
-        <% 50.times do %>
-        <div class="border-2">seat</div>
+        <% (event.grid.rows * 10).times do %>
+            <div class="border-2">seat</div>
         <% end %>
     </div>
     <% if action_name != "show" %>

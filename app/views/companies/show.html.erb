@@ -4,10 +4,15 @@
             <% @company.events.each do |event| %>
                 <%= link_to event.id, event %>
             <% end %>
-            <%= form_with model: [ @company, @company.events.build ] do |form| %>
+            
+            <%= form_with model: [ @company, @company.events.build ],
+             class: "border-2 p-8 flex flex-col" do |form| %>
                 Venue: <%= form.collection_select :venue_id, Venue.order(:id), :id, :id %>
-                <%= form.submit %>
+                <%= form.label :rows, "rows" %>
+                <%= form.number_field :rows %>
+                <%= form.submit class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
             <% end %>
+            
         <% end %>
     <% end %>
 <% end %>

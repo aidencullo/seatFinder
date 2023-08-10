@@ -24,6 +24,7 @@ class EventsController < ApplicationController
   def create
     @company = Company.find(params[:company_id])
     @event = @company.events.create(event_params)
+    @event.create_grid rows: params[:event][:rows]
     redirect_to @event
   end
 
