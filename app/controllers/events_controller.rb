@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
+    # @event.create_grid
   end
 
   # GET /events/1/edit
@@ -24,7 +25,7 @@ class EventsController < ApplicationController
   def create
     @company = Company.find(params[:company_id])
     @event = @company.events.create(event_params)
-    @event.create_grid rows: params[:event][:rows]
+    @event.create_grid rows: params[:event][:rows], cols: params[:event][:cols]
     redirect_to @event
   end
 
@@ -60,6 +61,8 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:venue_id, :company_id)
+      params.require(:event).permit(:venue_id,
+    :company_id)
     end
+    
 end
