@@ -14,7 +14,6 @@ class EventsController < ApplicationController
   # GET /events/new
   def new
     @event = Event.new
-    # @event.create_grid
   end
 
   # GET /events/1/edit
