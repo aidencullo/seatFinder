@@ -24,8 +24,16 @@ class EventsController < ApplicationController
   def create
     @company = Company.find(params[:company_id])
     @event = @company.events.create(event_params)
-    @event.create_grid rows: params[:event][:rows], cols: params[:event][:cols]
-    redirect_to @event
+    respond_to do |format|
+      if @event.save
+        format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
+        format.json { render :show, status: :ok, location: @event }
+      else
+        format.html { redirect_to @company, alert: "Event could not
+  be created" } 
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # PATCH/PUT /events/1 or /events/1.json
@@ -53,15 +61,15 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def event_params
-      params.require(:event).permit(:venue_id,
-    :company_id)
-    end
-    
+  # Only allow a list of trusted parameters through.
+  def event_params
+    params.require(:event).permit(:venue_id,
+                                  :company_id, :grid_attributes => [:rows, :cols]
+                                 )
+  end  
 end

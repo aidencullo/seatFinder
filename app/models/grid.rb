@@ -1,12 +1,16 @@
 class Grid < ApplicationRecord
   belongs_to :event
 
-  after_initialize :set_defaults
+  before_save :check
 
+  validates :rows, comparison: { greater_than: 0 }
+  validates :cols, comparison: { greater_than: 0 }
+  
   private
-  def set_defaults
-    self.rows = 5 if self.rows.blank?
-    self.cols = 5 if self.cols.blank?
+
+  def check
+    self.rows = 20 if self.rows > 20 
+    self.cols = 20 if self.cols > 20 
   end
   
 end
