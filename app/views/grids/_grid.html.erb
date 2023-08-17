@@ -1,0 +1,11 @@
+<% grid.rows.times do |i| %>
+    <div class="flex">
+        <% grid.rows.times do |k| %>
+            <div class="border-2">
+                <%= find_ticket(grid, i, k) ? 'reserved' : 'open' %>
+                <%= button_to "Unsubscribe",
+    event_path(seat: grid_index(grid, i, k)), method: :post %>
+            </div>
+        <% end %>
+    </div>
+<% end %>

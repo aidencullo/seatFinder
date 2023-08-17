@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[ show edit update destroy ]
+  before_action :set_event, only: %i[ show edit update destroy test]
 
   # GET /events or /events.json
   def index
@@ -11,6 +11,12 @@ class EventsController < ApplicationController
     @company = @event.company
   end
 
+  # POST /events/1 or /events/1.json
+  def test
+    @event.tickets.create(customer_id: 1, seat: params[:seat])
+  end
+
+  
   # GET /events/new
   def new
     @event = Event.new

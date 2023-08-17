@@ -11,7 +11,7 @@ params = {
   :company_id => 1,
   :grid_attributes => {
     :rows => 2,
-    :cols => 3,
+    :cols => 2,
   },
 }
 

@@ -1,12 +1,6 @@
 <div id="<%= dom_id event %>">
     Event: <%= event.id %> Venue: <%= event.venue_id %>
-    <% event.grid.rows.times do %>
-        <div class="flex">
-            <% event.grid.cols.times do %>
-                <div class="border-2">seat</div>
-            <% end %>        
-        </div>
-    <% end %>
+    <%=  render event.grid %>
     <% if action_name != "show" %>
         <%= link_to "Show this event", event, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
         <%= link_to 'Edit this event', edit_event_path(event), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
