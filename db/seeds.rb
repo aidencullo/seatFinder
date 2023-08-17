@@ -29,4 +29,3 @@ Venue.create
 Event.create(params)
 Event.create(params)
 Event.create(params)
-Ticket.create(event_id:1, customer_id:1)

@@ -13,7 +13,18 @@ class EventsController < ApplicationController
 
   # POST /events/1 or /events/1.json
   def test
-    @event.tickets.create(customer_id: 1, seat: params[:seat])
+    @ticket = @event.tickets.create(customer_id: 1, seat: params[:seat])
+    respond_to do |format|
+      if @ticket.save
+        format.html { redirect_to ticket_url(@ticket), notice: "Ticket was successfully created." }
+        format.json { render :show, status: :ok, location: @ticket }
+      else
+        format.html { redirect_to @event.company, alert: "Ticket could not
+  be created" } 
+        format.json { render json: @ticket.errors, status: :unprocessable_entity }
+      end
+    end
+
   end
 
   

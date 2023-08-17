@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   post '/events/:id', to: 'events#test'
 
-resources :companies, shallow: true do
+  resources :tickets
+  resources :companies, shallow: true do
     resources :events
   end
 
