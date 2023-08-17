@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[ show edit update destroy test]
+  before_action :set_event, only: %i[ show edit update destroy buy_ticket]
 
   # GET /events or /events.json
   def index
@@ -12,15 +12,14 @@ class EventsController < ApplicationController
   end
 
   # POST /events/1 or /events/1.json
-  def test
+  def buy_ticket
     @ticket = @event.tickets.create(customer_id: 1, seat: params[:seat])
     respond_to do |format|
       if @ticket.save
-        format.html { redirect_to ticket_url(@ticket), notice: "Ticket was successfully created." }
+        format.html { redirect_to ticket_url(@ticket), notice: "Ticket purchased!." }
         format.json { render :show, status: :ok, location: @ticket }
       else
-        format.html { redirect_to @event.company, alert: "Ticket could not
-  be created" } 
+        format.html { redirect_to @event, alert: "Seat not available" } 
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
     end

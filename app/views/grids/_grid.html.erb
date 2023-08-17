@@ -2,9 +2,12 @@
     <div class="flex">
         <% grid.rows.times do |k| %>
             <div class="border-2">
-                <%= find_ticket(grid, i, k) ? 'reserved' : 'open' %>
-                <%= button_to "Unsubscribe",
-    event_path(seat: grid_index(grid, i, k)), method: :post %>
+                <% if !local_ticket(grid, i, k)%>
+                    <%= button_to "buy",
+                      event_path(seat: grid_index(grid, i, k)), method: :post %>
+                <% else %>
+                    <%= link_to "sold", local_ticket_path(grid, i, k) %>
+                <% end %>
             </div>
         <% end %>
     </div>

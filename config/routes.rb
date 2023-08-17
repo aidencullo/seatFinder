@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'companies#example'
 
-  post '/events/:id', to: 'events#test'
+  post '/events/:id', to: 'events#buy_ticket'
 
   resources :tickets
   resources :companies, shallow: true do
