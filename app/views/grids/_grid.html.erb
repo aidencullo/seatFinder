@@ -1,17 +1,21 @@
 <% grid.rows.times do |i| %>
     <div class="flex">
         <% grid.rows.times do |k| %>
-            <div class="border-2">
+            <div class="border-2 p-2 w-20">
                 <% if !local_ticket(grid, i, k)%>
-                    <%= button_to "buy", { controller: "tickets",
-                        action: "test", event_id:
-                        grid.event.id,
-                        seat: grid_index(grid, i, k), }, data: { turbo: false
-                        }, method: :post %>
+                    <div class="bg-green-500 h-full">
+                        <%= button_to "buy", { controller: "tickets",
+                            action: "test", event_id:
+                            grid.event.id,
+                            seat: grid_index(grid, i, k), }, data: { turbo: false
+                            }, method: :post %>
+                    </div>
                 <% else %>
-                    <%= link_to "sold", local_ticket_path(grid, i, k) %>
+                    <div class="bg-red-500 h-full">
+                        <%= link_to "sold", local_ticket_path(grid, i, k) %>
+                    </div>
                 <% end %>
-            </div>
+                    </div>
         <% end %>
     </div>
 <% end %>
