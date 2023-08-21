@@ -13,4 +13,5 @@ module GridHelper
   def grid_index(grid, i, k)
     return i * grid.cols + k
   end
+
 end

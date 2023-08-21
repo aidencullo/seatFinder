@@ -1,5 +1,6 @@
 class TicketsController < ApplicationController
   before_action :set_ticket, only: %i[ show edit update destroy ]
+  # before_action :set_event, only: %i[ new ]
 
   # GET /tickets or /tickets.json
   def index
@@ -12,20 +13,33 @@ class TicketsController < ApplicationController
 
   # GET /tickets/new
   def new
-    @ticket = Ticket.new
+    @ticket = Ticket.new    
   end
 
   # GET /tickets/1/edit
   def edit
   end
 
-  # POST /tickets or /tickets.json
-  def create
-    @ticket = Ticket.new(ticket_params)
+  def test
+    @event = Event.find(params[:event_id])
+    @customer = Customer.create
+    @ticket = @event.tickets.build
+    @ticket.seat = params[:seat]
+    @ticket.customer = @customer
 
     respond_to do |format|
+      format.html { render :new, notice: "Ticket was successfully created." }
+      format.json { render :show, status: :created, location: @ticket }
+    end
+  end
+
+  # POST /tickets or /tickets.json
+  def create
+
+    @ticket = Ticket.create(ticket_params)    
+    respond_to do |format|
       if @ticket.save
-        format.html { redirect_to ticket_url(@ticket), notice: "Ticket was successfully created." }
+        format.html {     redirect_to ticket_path(@ticket), notice: "Ticket was successfully created." }
         format.json { render :show, status: :created, location: @ticket }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,13 +72,17 @@ class TicketsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_ticket
-      @ticket = Ticket.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_ticket
+    @ticket = Ticket.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def ticket_params
-      params.require(:ticket).permit(:customer_id, :event_id)
-    end
+  def set_event
+    @event = Event.find(params[:event_id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def ticket_params
+    params.require(:ticket).permit(:customer_id, :event_id, :name, :seat)
+  end
 end

@@ -3,8 +3,11 @@
         <% grid.rows.times do |k| %>
             <div class="border-2">
                 <% if !local_ticket(grid, i, k)%>
-                    <%= button_to "buy",
-                      event_path(seat: grid_index(grid, i, k)), method: :post %>
+                    <%= button_to "buy", { controller: "tickets",
+                        action: "test", event_id:
+                        grid.event.id,
+                        seat: grid_index(grid, i, k), }, data: { turbo: false
+                        }, method: :post %>
                 <% else %>
                     <%= link_to "sold", local_ticket_path(grid, i, k) %>
                 <% end %>
