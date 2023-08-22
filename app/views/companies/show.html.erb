@@ -10,17 +10,9 @@
             <% if alert.present? %>
                 <p class="py-2 px-3 bg-red-50 mb-5 text-red-500 font-medium rounded-lg inline-block" id="notice"><%= alert %></p>
             <% end %>
-            <%= form_with model: [ @company, @company.events.build ],
-             class: "border-2 p-8 flex flex-col" do |form| %>
-                Venue: <%= form.collection_select :venue_id, Venue.order(:id), :id, :id %>
-                <%= form.fields_for :grid do |subform| %>
-                    <%= subform.label :rows, "rows" %>
-                    <%= subform.number_field :rows, :required => true %>
-                    <%= subform.label :cols, "cols" %>
-                    <%= subform.number_field :cols, :required => true %>
-                <% end %>
-                <%= form.submit class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-            <% end %>
+
+            <%= render 'events/form' %>
+            
         <% end %>
     <% end %>
 <% end %>

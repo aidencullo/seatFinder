@@ -1,22 +1,27 @@
-<%= form_with(model: event, class: "contents", url: [company_path, event]) do |form| %>
-  <% if event.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+<%= render(ContentComponent.new(title: "add events")) do %>            
+    <%= form_with model: [ @company, @company.events.build ],
+    class:"flex flex-col" do |form| %>
 
-      <ul>
-        <% event.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% if @company.errors.any? %>
+            <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+                <h2><%= pluralize(@company.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+                <ul>
+                    <% @company.errors.each do |error| %>
+                        <li><%= error.full_message %></li>
+                    <% end %>
+                </ul>
+            </div>
         <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="my-5">
-    <%= form.label :venue_id %>
-    <%= form.text_field :venue_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
+        Venue: <%= form.collection_select :venue_id, Venue.order(:id), :id, :id %>
+        <%= form.fields_for :grid do |subform| %>
+            <%= subform.label :rows, "rows" %>
+            <%= subform.number_field :rows, :required => true %>
+            <%= subform.label :cols, "cols" %>
+            <%= subform.number_field :cols, :required => true %>
+        <% end %>
+        <%= form.submit class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
 
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
+    <% end %>
 <% end %>
