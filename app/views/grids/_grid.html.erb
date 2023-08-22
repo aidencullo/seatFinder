@@ -1,6 +1,6 @@
 <% grid.rows.times do |i| %>
     <div class="flex">
-        <% grid.rows.times do |k| %>
+        <% grid.cols.times do |k| %>
             <div class="border-2 p-2 w-20">
                 <% if !local_ticket(grid, i, k)%>
                     <div class="bg-green-500 h-full">

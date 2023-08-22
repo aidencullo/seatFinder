@@ -10,22 +10,6 @@ class EventsController < ApplicationController
   def show
     @company = @event.company
   end
-
-  # POST /events/1 or /events/1.json
-  def buy_ticket
-    @ticket = @event.tickets.create(customer_id: 1, seat: params[:seat])
-    respond_to do |format|
-      if @ticket.save
-        format.html { redirect_to ticket_url(@ticket), notice: "Ticket purchased!." }
-        format.json { render :show, status: :ok, location: @ticket }
-      else
-        format.html { redirect_to @event, alert: "Seat not available" } 
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
-      end
-    end
-
-  end
-
   
   # GET /events/new
   def new
