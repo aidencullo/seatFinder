@@ -38,7 +38,7 @@ class SpacesController < ApplicationController
   def update
     respond_to do |format|
       if @space.update(space_params)
-        format.html { redirect_to space_url(@space), notice: "Space was successfully updated." }
+        format.html { redirect_to edit_event_url(@space.grid.event), notice: "Space was successfully updated." }
         format.json { render :show, status: :ok, location: @space }
       else
         format.html { render :edit, status: :unprocessable_entity }

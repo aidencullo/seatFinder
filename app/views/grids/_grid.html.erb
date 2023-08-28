@@ -29,8 +29,10 @@
         <div class="flex">
             <% grid.cols.times do |k| %>
                 <div class="border-2 p-2 w-20">
-                    <% if space_available(grid, i, k) %>
-                        <%= form_with model: local_space(grid, i, k), method: :put do |form| %>
+                    <% if local_ticket(grid, i, k) %>
+                        bought
+                    <% elsif space_available(grid, i, k) %>
+                            <%= form_with model: local_space(grid, i, k), method: :put do |form| %>
                             <%= form.hidden_field :available, :value => !local_space(grid, i, k).available %>
                             <%= form.submit 'a',
                               class:"bg-blue-500 h-full w-full" %>
