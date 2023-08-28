@@ -1,0 +1,14 @@
+<div class="border-2 rounded-full p-2 w-20">
+    <% if ticket %>
+        <div class="h-full w-full bg-gray-600">
+            bought
+        </div>
+    <% else%>
+        <%= form_with model: space, method: :put do |form| %>
+            <%= form.hidden_field :available, :value => !space.available %>
+            <%= form.submit  "#{space.available ? 'a' : 'u'}",
+             class:"h-full w-full #{space.available ? 'bg-green-600' : 'bg-red-600'}"
+            %>
+        <% end %>
+    <% end %>
+</div>

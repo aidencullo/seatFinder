@@ -2,25 +2,10 @@
     <% grid.rows.times do |i| %>
         <div class="flex">
             <% grid.cols.times do |k| %>
-                <div class="border-2 p-2 w-20">
-                    <% if !space_available(grid, i, k) %>
-                        <div class="bg-gray-500 h-full">
-                            u
-                        </div>
-                    <% elsif !local_ticket(grid, i, k)%>
-                        <div class="bg-green-500 h-full">
-                            <%= button_to "buy", { controller: "tickets",
-                                action: "test", event_id:
-                                grid.event.id,
-                                seat: grid_index(grid, i, k), }, data: { turbo: false
-                                }, method: :post %>
-                        </div>
-                    <% else %>
-                        <div class="bg-red-500 h-full">
-                            <%= link_to "sold", local_ticket_path(grid, i, k) %>
-                        </div>
-                    <% end %>
-                </div>
+                <%= render 'grids/cell_show', space: local_space(grid, i,
+                                                                 k),
+    ticket: local_ticket(grid, i, k), seat_number: grid_index(grid, i,
+    k), event: grid.event %>
             <% end %>
         </div>
     <% end %>
@@ -28,23 +13,8 @@
     <% grid.rows.times do |i| %>
         <div class="flex">
             <% grid.cols.times do |k| %>
-                <div class="border-2 p-2 w-20">
-                    <% if local_ticket(grid, i, k) %>
-                        bought
-                    <% elsif space_available(grid, i, k) %>
-                            <%= form_with model: local_space(grid, i, k), method: :put do |form| %>
-                            <%= form.hidden_field :available, :value => !local_space(grid, i, k).available %>
-                            <%= form.submit 'a',
-                              class:"bg-blue-500 h-full w-full" %>
-                        <% end %>
-                    <% else %>
-                        <%= form_with model: local_space(grid, i, k), method: :put do |form| %>
-                            <%= form.hidden_field :available, :value => !local_space(grid, i, k).available %>
-                            <%= form.submit 'u',
-                                class:"bg-gray-500 h-full w-full" %>
-                        <% end %>
-                    <% end %>
-                </div>
+                <%= render 'grids/cell_edit', space: local_space(grid, i,
+                                                            k), ticket: local_ticket(grid, i, k) %>
             <% end %>
         </div>
     <% end %>
