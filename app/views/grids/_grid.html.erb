@@ -2,10 +2,9 @@
     <% grid.rows.times do |i| %>
         <div class="flex">
             <% grid.cols.times do |k| %>
-                <%= render 'grids/cell_show', space: local_space(grid, i,
-                                                                 k),
-    ticket: local_ticket(grid, i, k), seat_number: grid_index(grid, i,
-    k), event: grid.event %>
+                <%= render 'grids/cell_show', space:
+                grid.get_space(i,k), ticket: grid.get_ticket( i, k), seat_number:
+                grid.get_index(i,k), event: grid.event %> 
             <% end %>
         </div>
     <% end %>
@@ -13,8 +12,8 @@
     <% grid.rows.times do |i| %>
         <div class="flex">
             <% grid.cols.times do |k| %>
-                <%= render 'grids/cell_edit', space: local_space(grid, i,
-                                                            k), ticket: local_ticket(grid, i, k) %>
+                <%= render 'grids/cell_edit', space:
+                grid.get_space(i,k), ticket: grid.get_ticket(i, k) %> 
             <% end %>
         </div>
     <% end %>
