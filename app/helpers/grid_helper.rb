@@ -18,7 +18,7 @@ module GridHelper
     grid.spaces.where(position: grid_index(grid, i, k)).first.available
   end
 
-  def local_space_path(grid, i, k)
+  def local_space(grid, i, k)
     space = grid.spaces.where(position: grid_index(grid, i, k)).first
     return space
   end

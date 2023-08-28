@@ -30,18 +30,17 @@
             <% grid.cols.times do |k| %>
                 <div class="border-2 p-2 w-20">
                     <% if space_available(grid, i, k) %>
-                        <div class="bg-blue-500 h-full">
-                            <%= form_with model:
-                                local_space_path(grid, i, k),
-                             method: :put do |form| %>
-                                <%= form.hidden_field :available, value: false %>
-                                <%= form.submit 'a' %>
-                            <% end %>
-                        </div>
+                        <%= form_with model: local_space(grid, i, k), method: :put do |form| %>
+                            <%= form.hidden_field :available, :value => !local_space(grid, i, k).available %>
+                            <%= form.submit 'a',
+                              class:"bg-blue-500 h-full w-full" %>
+                        <% end %>
                     <% else %>
-                        <div class="bg-gray-500 h-full">
-                            <%= link_to "u", local_ticket_path(grid, i, k) %>
-                        </div>
+                        <%= form_with model: local_space(grid, i, k), method: :put do |form| %>
+                            <%= form.hidden_field :available, :value => !local_space(grid, i, k).available %>
+                            <%= form.submit 'u',
+                                class:"bg-gray-500 h-full w-full" %>
+                        <% end %>
                     <% end %>
                 </div>
             <% end %>
