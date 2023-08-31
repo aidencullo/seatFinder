@@ -1,8 +1,4 @@
 <div id="<%= dom_id event %>">
     Event: <%= event.id %> Venue: <%= event.venue_id %>
-    <% if action_name != "edit" %>
-        <%=  render event.grid %>
-    <% else %>
-        <%=  render event.grid %>
-    <% end %>
+    <%=  render event.grid %>
 </div>
