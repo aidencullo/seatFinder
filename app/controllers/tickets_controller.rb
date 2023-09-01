@@ -12,8 +12,12 @@ class TicketsController < ApplicationController
   end
 
   # GET /tickets/new
-  def new
-    @ticket = Ticket.new    
+  def new    
+    @event = Event.first
+    @customer = Customer.create
+    @ticket = @event.tickets.build
+    @ticket.seat = 0
+    @ticket.customer = @customer
   end
 
   # GET /tickets/1/edit
@@ -39,7 +43,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.create(ticket_params)    
     respond_to do |format|
       if @ticket.save
-        format.html { redirect_to ticket_path(@ticket), notice: "Ticket was successfully created." }
+        format.html { redirect_to @ticket.event, notice: "Ticket was successfully created." }
         format.json { render :show, status: :created, location: @ticket }
       else
         format.html { render :new, status: :unprocessable_entity }

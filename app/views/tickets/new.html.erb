@@ -4,3 +4,6 @@
         <%= render "form", ticket: @ticket %>
     <% end %>
 </div>
+<%= turbo_frame_tag 'new_message', target: '_top' do %>
+    <%= render "form", ticket: @ticket %>
+<% end %>

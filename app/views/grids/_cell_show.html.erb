@@ -18,9 +18,5 @@
     <% end %>
 </div>
 
-<%= turbo_frame_tag 'ticket_frame' do %>
-    <%= button_to "buy", { controller: "tickets",
-        action: "test", event_id:
-        event.id,
-        seat: seat_number, }, method: :post %>
-<% end %>
+<%= turbo_frame_tag 'new_message', src: new_ticket_path, target:
+"_top" %>

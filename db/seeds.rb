@@ -24,8 +24,4 @@ Ticket.destroy_all
 Company.create
 Customer.create
 Venue.create
-Venue.create
-Venue.create
-Event.create(params)
-Event.create(params)
 Event.create(params)
