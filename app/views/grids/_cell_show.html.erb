@@ -1,6 +1,5 @@
 
 <%= turbo_frame_tag 'main_frame' do %>
-
     <div class="border-2 rounded-full p-2 w-20">
         <% if !space.available %>
             <div class="bg-gray-500 h-full">
@@ -8,11 +7,6 @@
             </div>
         <% elsif !ticket %>
             <div class="bg-green-500 h-full">
-                <%#= button_to "buy", { controller: "tickets",
-                action: "test", event_id:
-                event.id,
-                seat: seat_number, }, data: { turbo: false
-                }, method: :post %>
                 <%= link_to "buy",
                     buy_path({
                         seat: seat_number,

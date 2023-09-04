@@ -3,7 +3,9 @@
         <div class="border-2 rounded-full p-2 w-20">
             <% if !space.available %>
                 <div class="bg-red-500 h-full">
-                    <%= link_to "sold", space.ticket, target: '_top'%>
+                    <%= link_to "sold", space.ticket,
+                    data: { turbo_frame: "new_message" }
+                    %>
                 </div>
             <% else %>
                 <div class="bg-green-500 h-full">

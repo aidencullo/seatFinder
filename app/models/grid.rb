@@ -10,16 +10,8 @@ class Grid < ApplicationRecord
   
   before_save :default_save
 
-  def get_space(i, k)
-    space = self.spaces.where(position: self.get_index(i, k)).first
-  end
-
-  def get_ticket(i, k)
-    ticket = self.event.tickets.where(seat: get_index(i, k)).first
-  end
-
-  def get_index(i, k)
-    return i * cols + k
+  def find_space(i, k)
+    return spaces.find_by(position: i * cols + k)
   end
 
   private
