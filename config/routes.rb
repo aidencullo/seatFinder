@@ -3,8 +3,9 @@ Rails.application.routes.draw do
 
   get '/tickets/buy', to: 'tickets#buy', as: 'buy'
 
-  resources :tickets
-  resources :spaces
+  resources :spaces, shallow: true do
+    resources :tickets
+  end
   
   resources :companies, shallow: true do
     resources :events

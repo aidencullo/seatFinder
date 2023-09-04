@@ -10,11 +10,7 @@
             <% else %>
                 <div class="bg-green-500 h-full">
                     <%= link_to "buy",
-                        buy_path({
-                            seat: space.position,
-                            event_id: space.grid.event.id,
-                            space_id: space,
-                        }),
+                        new_space_ticket_path(space),
                      data: { turbo_frame: "new_message" }
                     %>
                 </div>
