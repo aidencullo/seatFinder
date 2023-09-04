@@ -1,4 +1,7 @@
 <div id="<%= dom_id event %>">
     Event: <%= event.id %> Venue: <%= event.venue_id %>
-    <%=  render event.grid %>
+    <div id="grid_frame">
+        <%= render event.grid %>
+    </div>
+    <%= turbo_frame_tag 'new_message'%>
 </div>

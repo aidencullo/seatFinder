@@ -1,4 +1,5 @@
 class Ticket < ApplicationRecord
+  belongs_to :space
   belongs_to :customer
   belongs_to :event
   validates :seat, uniqueness: { scope: :event,

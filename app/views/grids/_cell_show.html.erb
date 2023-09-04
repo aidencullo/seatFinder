@@ -8,11 +8,18 @@
             </div>
         <% elsif !ticket %>
             <div class="bg-green-500 h-full">
-                <%= button_to "buy", { controller: "tickets",
-                    action: "test", event_id:
-                    event.id,
-                    seat: seat_number, }, data: { turbo: false
-                    }, method: :post %>
+                <%#= button_to "buy", { controller: "tickets",
+                action: "test", event_id:
+                event.id,
+                seat: seat_number, }, data: { turbo: false
+                }, method: :post %>
+                <%= link_to "buy",
+                    buy_path({
+                        seat: seat_number,
+                        event_id: event.id,
+                    }),
+                    data: { turbo_frame: "new_message" }
+                %>
             </div>
         <% else %>
             <div class="bg-red-500 h-full">
@@ -22,19 +29,3 @@
     </div>
 <% end %>
 
-<%= turbo_frame_tag 'new_message' do %>
-
-    <!-- 
-         <%= button_to "buy", {
-         controller: "tickets",
-         action: "test",
-         event_id: event.id,
-         seat: seat_number, },
-         method: :post %>
-    -->
-    <%= link_to "buy",
-       new_ticket_path,
-       data: { turbo_frame: "main_frame" }
-    %>
-
-<% end %>

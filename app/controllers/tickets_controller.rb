@@ -13,23 +13,20 @@ class TicketsController < ApplicationController
 
   # GET /tickets/new
   def new    
-    @event = Event.first
-    @customer = Customer.create
-    @ticket = @event.tickets.build
-    @ticket.seat = 0
-    @ticket.customer = @customer
+    @ticket = Ticket.new
   end
 
   # GET /tickets/1/edit
   def edit
   end
 
-  def test
+  def buy
     @event = Event.find(params[:event_id])
     @customer = Customer.create
     @ticket = @event.tickets.build
     @ticket.seat = params[:seat]
     @ticket.customer = @customer
+    @ticket.space = Space.find(params[:space_id])
 
     respond_to do |format|
       format.html { render :new, notice: "Ticket was successfully created." }
@@ -41,10 +38,12 @@ class TicketsController < ApplicationController
   def create
 
     @ticket = Ticket.create(ticket_params)    
+    @ticket.space.update(available: false)
     respond_to do |format|
       if @ticket.save
         format.html { redirect_to @ticket.event, notice: "Ticket was successfully created." }
         format.json { render :show, status: :created, location: @ticket }
+        format.turbo_stream
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
@@ -87,6 +86,8 @@ class TicketsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def ticket_params
-    params.require(:ticket).permit(:customer_id, :event_id, :name, :seat)
+    params.require(:ticket).permit(:customer_id, :event_id, :name,
+  :seat, :space_id)
   end
 end
+

@@ -1,12 +1,22 @@
-<div id="<%= dom_id space %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Available:</strong>
-    <%= space.available %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "Show this space", space, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this space', edit_space_path(space), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
-</div>
+<%= turbo_frame_tag 'main_frame' do %>
+    <div id="<%= dom_id space %>">
+        <div class="border-2 rounded-full p-2 w-20">
+            <% if !space.available %>
+                <div class="bg-red-500 h-full">
+                    <%= link_to "sold", space.ticket, target: '_top'%>
+                </div>
+            <% else %>
+                <div class="bg-green-500 h-full">
+                    <%= link_to "buy",
+                        buy_path({
+                            seat: space.position,
+                            event_id: space.grid.event.id,
+                            space_id: space,
+                        }),
+                     data: { turbo_frame: "new_message" }
+                    %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+<% end %>
