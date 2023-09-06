@@ -11,5 +11,11 @@ Rails.application.routes.draw do
     resources :events
   end
 
-  get '*other', to: 'application#unknown'
+  scope :api do
+    scope :v1 do
+      resources :events
+    end
+  end
+
+  get '*other', to: 'application#not_found'
 end
