@@ -6,13 +6,20 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-params = {
+event_params = {
   :venue_id => 1,
   :company_id => 1,
   :grid_attributes => {
     :rows => 2,
     :cols => 2,
   },
+}
+
+ticket_params = {
+  :customer_id => 1,
+  :event_id => 1,
+  :name => 'aiden',
+  :seat => 1,
 }
 
 Company.destroy_all
@@ -24,8 +31,5 @@ Ticket.destroy_all
 Company.create
 Customer.create
 Venue.create
-Venue.create
-Venue.create
-Event.create(params)
-Event.create(params)
-Event.create(params)
+Event.create(event_params)
+Ticket.create(ticket_params)

@@ -13,9 +13,8 @@ Rails.application.routes.draw do
 
   scope :api do
     scope :v1 do
-      resources :events do
-        resources :tickets
-      end
+      resources :events
+      resources :tickets
     end
   end
 
