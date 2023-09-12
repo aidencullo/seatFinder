@@ -6,7 +6,8 @@ const URL = `${DOMAIN}:${PORT}${BASE}`
 const OPTIONS = {
   headers:  {
     "Content-Type": "application/json",
-    "Accept": "application/json"
+    "Accept": "application/json",
+    'Authorization': 'Bearer ' + '101',
   },
 }
 
