@@ -5,35 +5,35 @@ const BASE = '/api/v1'
 const URL = `${DOMAIN}:${PORT}${BASE}`
 const OPTIONS = {
   headers:  {
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    'Authorization': 'Bearer ' + '101',
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'token': 'my-secret-tokenn',
   },
 }
 
 // raw http request
 const request = async (url, method = 'GET', data = undefined, customOptions
-= OPTIONS) => {
-  console.log(`sending ${method} request to ${url}`)
+                       = OPTIONS) => {
+                         console.log(`sending ${method} request to ${url}`)
 
-  const options = { ...customOptions }
-  options.method = method
-  options.body = JSON.stringify(data)
-  
-  const response = await fetch(url, options)
+                         const options = { ...customOptions }
+                         options.method = method
+                         options.body = JSON.stringify(data)
+                         
+                         const response = await fetch(url, options)
 
-  const returnObj = {
-    status: response.status,
-  }
+                         const returnObj = {
+                           status: response.status,
+                         }
 
-  returnObj.body = await parseResponse(response)
+                         returnObj.body = await parseResponse(response)
 
-  if (VERBOSE) {
-    console.log(returnObj)
-  }
+                         if (VERBOSE) {
+                           console.log(returnObj)
+                         }
 
-  return returnObj;
-}
+                         return returnObj;
+                       }
 
 //helpers
 const makePath = (...sub) => {
@@ -44,7 +44,13 @@ const parseResponse = async (response) => {
   try {
     return await response.json()
   } catch (e) {
-    throw new Error("response is not valid json")
+    try {
+      return await response.text()
+      throw new Error(`response is not valid json ${await response.text()}`)
+    } catch (e) {
+      console.error(e)
+      throw new Error('response is not valid json or text')
+    }
   }
 }
 
@@ -118,10 +124,8 @@ const customReqest = async (method) => {
     throw new Error('method not recognized')
   }
   try {
-    // const path = makePath('events')
     const path = makePath()
     const response = await request(path, method);
-    // testResponse(200, response.status)
     return 0
   } catch(e) {
     console.error(e)
