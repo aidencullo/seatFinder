@@ -26,7 +26,7 @@ const request = async (url, method = 'GET', data = undefined, customOptions
     status: response.status,
   }
 
-  returnObj.body = await response.json()
+  returnObj.body = await parseResponse(response)
 
   if (VERBOSE) {
     console.log(returnObj)
@@ -38,6 +38,14 @@ const request = async (url, method = 'GET', data = undefined, customOptions
 //helpers
 const makePath = (...sub) => {
   return URL + '/' + sub.join('/')
+}
+
+const parseResponse = async (response) => {
+  try {
+    return await response.json()
+  } catch (e) {
+    throw new Error("response is not valid json")
+  }
 }
 
 const testResponse = (status, responseStatus) => {
