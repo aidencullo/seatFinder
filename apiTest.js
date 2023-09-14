@@ -3,11 +3,12 @@ const DOMAIN = 'http://localhost'
 const PORT = '3000'
 const BASE = '/api/v1'
 const URL = `${DOMAIN}:${PORT}${BASE}`
+const token = '8b36056f81e2df855c7a61fd6cc7bee5038380cb5ec39b77b2d389fe77556202'
 const OPTIONS = {
   headers:  {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
-    'token': 'my-secret-tokenn',
+    'token': token,
   },
 }
 
