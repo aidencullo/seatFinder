@@ -1,26 +1,102 @@
-# todo
-- table of contents
-# format
-## req
-## res
-```json
-{
-    status
-    body
-}
+## Seatfinder
+### version 1.0.0
+
+Manage your venue from the command line.
+
+### Requests
+
+## Events
+
+```plaintext
+/events
 ```
-## ex:
-```json
-{
-    status: 200,
-    body: {
-        type: 'event',
-        tickets: [ [Object] ]
-    }
+
+| method                   | endpoint     | body     | Description           |
+|--------------------------|--------------|----------|-----------------------|
+| GET                      | /events/:id  | No       | Retrieve event :id    |
+| POST                     | /events/     | Yes      | Create event          |
+
+
+## Tickets
+
+```plaintext
+/tickets
+```
+
+| method                   | endpoint      | body     | Description           |
+|--------------------------|---------------|----------|-----------------------|
+| GET                      | /tickets/:id  | No       | Retrieve ticket :id   |
+| POST                     | /tickets/     | Yes      | Create ticket         |
+
+
+# Responses
+
+## Events
+
+### Create an event
+
+```plaintext
+GET /events/:id
+```
+
+returns event object :id
+
+```javascript
+{ 
+  event,
+  tickets,
 }
 ```
 
-## templates...
-## datatypes
-## accepted methods
-## errors
+### Retrieve an event
+
+```plaintext
+POST /events
+```
+returns new object
+
+```javascript
+{ 
+  event,
+  tickets,
+}
+```
+### Delete an event
+
+```plaintext
+DELETE /events/:id
+```
+returns nothing
+
+```javascript
+
+```
+
+## Ticket
+
+### Retrieve a ticket
+
+```plaintext
+GET /tickets/:id
+```
+
+returns ticket object :id
+
+```javascript
+{ 
+  ticket,
+}
+```
+
+### Create a ticket
+
+```plaintext
+POST /tickets
+```
+returns new ticket object
+
+```javascript
+{ 
+  ticket,
+}
+```

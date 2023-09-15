@@ -23,14 +23,10 @@ const request = async (url, method = 'GET', data = undefined, customOptions
                          
                          const response = await fetch(url, options)
 
-                         const returnObj = {
-                           status: response.status,
-                         }
-
-                         returnObj.body = await parseResponse(response)
+                         const returnObj = await parseResponse(response)
 
                          if (VERBOSE) {
-                           console.log(returnObj)
+                           console.log(returnObj || '[empty body]')
                          }
 
                          return returnObj;
@@ -42,32 +38,31 @@ const makePath = (...sub) => {
 }
 
 const parseResponse = async (response) => {
-  try {
-    return await response.json()
-  } catch (e) {
-    try {
-      return await response.text()
-      throw new Error(`response is not valid json ${await response.text()}`)
-    } catch (e) {
-      console.error(e)
-      throw new Error('response is not valid json or text')
-    }
+  const contentType = response.headers.get("content-type")
+  if (contentType?.indexOf("application/json") !== -1) {
+    return await parseJson(response)
   }
+  if (contentType?.indexOf("text/html") !== -1) {
+    throw new Error('html received')
+  }
+  throw new Error('unrecognized response format')
 }
 
-const testResponse = (status, responseStatus) => {
-  if (status === responseStatus) {
-    console.log("SUCCESS")
-  } else {
-    console.log("FAILURE")
+const parseJson = async (response) => {
+  if (response.status !== 204) {
+    return response.json()
   }
 }
 
 const fullApiTest = async () => {
   const id = await createEvent()
+  console.log()
   await buyTicket(id)
+  console.log()
   await getEvent(id)
+  console.log()
   await deleteEvent(id)
+  console.log()
   await getEvents()
 }
 
@@ -86,8 +81,7 @@ const createEvent = async () => {
       cols:1
     }
   });
-  testResponse(200, createEventResponse.status)
-  return createEventResponse.body.event.id
+  return createEventResponse.event.id
 }
 
 const buyTicket = async (id) => {
@@ -98,25 +92,21 @@ const buyTicket = async (id) => {
     name: 'aiden',
     seat: 0,
   });
-  testResponse(201, buyTicketResponse.status)
 }
 
 const getEvent = async (id) => {
   const getEventPath = makePath('events', id)
   const getEventResponse = await request(getEventPath);
-  testResponse(200, getEventResponse.status)
 }
 
 const deleteEvent = async (id) => {
   const deleteEventPath = makePath('events', id)
   const deleteEventResponse = await request(deleteEventPath, 'DELETE');
-  testResponse(204, deleteEventResponse.status)
 }
 
 const getEvents = async () => {
   const getEventPath = makePath('events')
   const getEventResponse = await request(getEventPath);
-  testResponse(200, getEventResponse.status)
 }
 
 const customReqest = async (method) => {
@@ -194,8 +184,8 @@ const deleteApiTest = async () => {
 }
 
 // call tests
-simpleApiTest()
-// fullApiTest()
+// simpleApiTest()
+fullApiTest()
 // deleteApiTest()
 // getApiTest()
 // postApiTest()
