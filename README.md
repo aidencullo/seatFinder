@@ -15,7 +15,7 @@ Manage your venue from the command line.
 |--------------------------|--------------|----------|-----------------------|
 | GET                      | /events/:id  | No       | Retrieve event :id    |
 | POST                     | /events/     | Yes      | Create event          |
-
+| DELETE                   | /events/:id  | No       | Delete event          |
 
 ## Tickets
 
@@ -27,6 +27,7 @@ Manage your venue from the command line.
 |--------------------------|---------------|----------|-----------------------|
 | GET                      | /tickets/:id  | No       | Retrieve ticket :id   |
 | POST                     | /tickets/     | Yes      | Create ticket         |
+| DELETE                   | /tickets/:id  | No       | Delete ticket         |
 
 
 # Responses
@@ -98,5 +99,33 @@ returns new ticket object
 ```javascript
 { 
   ticket,
+}
+```
+
+# Datatypes
+
+## Event
+
+```javascript
+{
+  id: 1,
+  venue_id: 1,
+  company_id: 1,
+  created_at: '2023-09-15T18:31:18.596Z',
+  updated_at: '2023-09-15T18:31:18.596Z',
+  tickets,
+}
+```
+
+## Ticket
+```javascript
+{
+      id: 1,
+      customer_id: 1,
+      event_id: 1,
+      created_at: '2023-09-15T18:31:18.693Z',
+      updated_at: '2023-09-15T18:31:18.693Z',
+      seat: 1,
+      name: 'aiden',
 }
 ```

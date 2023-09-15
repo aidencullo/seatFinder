@@ -1,24 +1,18 @@
 class EventsController < ApplicationController
-  around_action :handle_exceptions, if: proc { request.path.include?('/api') }
+  around_action :handle_exceptions
   before_action :set_event, only: %i[ show edit update destroy buy_ticket]
 
-  # Catch exception and return JSON-formatted error
   def handle_exceptions
     begin
       yield
     rescue ActiveRecord::RecordNotFound => e
-      @status = 404
-      @message = 'Record not found'
-    rescue ActiveRecord::RecordInvalid => e
-      render_unprocessable_entity_response(e.record) && return
-    rescue ArgumentError => e
-      @status = 400
-    rescue StandardError => e
-      @status = 500
+      respond_to do |format|
+        format.html { head :not_found }
+        format.json { head :not_found }
+      end
     end
-    render json: { success: false, message: @message || e.class.to_s,
-                  errors: [{ detail: e.message }] }, status: @status unless e.class == NilClass
   end
+
   # GET /events or /events.json
   def index
     @events = Event.all

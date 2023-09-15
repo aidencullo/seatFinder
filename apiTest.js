@@ -15,13 +15,15 @@ const OPTIONS = {
 // raw http request
 const request = async (url, method = 'GET', data = undefined, customOptions
                        = OPTIONS) => {
-                         console.log(`sending ${method} request to ${url}`)
+                         console.log(`${method} ${url}`)
 
                          const options = { ...customOptions }
                          options.method = method
                          options.body = JSON.stringify(data)
                          
                          const response = await fetch(url, options)
+
+                         console.log(`${response.status}`)
 
                          const returnObj = await parseResponse(response)
 
@@ -42,27 +44,24 @@ const parseResponse = async (response) => {
   if (contentType?.indexOf("application/json") !== -1) {
     return await parseJson(response)
   }
-  if (contentType?.indexOf("text/html") !== -1) {
-    throw new Error('html received')
-  }
-  throw new Error('unrecognized response format')
+  throw new Error('non-JSON response format')
 }
 
 const parseJson = async (response) => {
-  if (response.status !== 204) {
+  if (response.status !== 204 && response.status !== 404) {
     return response.json()
   }
 }
 
 const fullApiTest = async () => {
-  const id = await createEvent()
-  console.log()
-  await buyTicket(id)
-  console.log()
-  await getEvent(id)
-  console.log()
-  await deleteEvent(id)
-  console.log()
+  const eventId = await createEvent()
+  const ticketId = await buyTicket(eventId)
+  await getEvent(eventId)
+  await deleteTicket(ticketId)
+  await deleteTicket(ticketId)
+  await getEvents()
+  await deleteEvent(eventId)
+  await deleteEvent(eventId)
   await getEvents()
 }
 
@@ -70,7 +69,6 @@ const simpleApiTest = async () => {
   await getEvent(1)
 }
 
-//HTTP REQUESTS
 const createEvent = async () => {
   const createEventPath = makePath('events')
   const createEventResponse = await request(createEventPath, 'POST', {
@@ -81,7 +79,7 @@ const createEvent = async () => {
       cols:1
     }
   });
-  return createEventResponse.event.id
+  return createEventResponse.id
 }
 
 const buyTicket = async (id) => {
@@ -92,6 +90,7 @@ const buyTicket = async (id) => {
     name: 'aiden',
     seat: 0,
   });
+  return buyTicketResponse.id
 }
 
 const getEvent = async (id) => {
@@ -107,6 +106,11 @@ const deleteEvent = async (id) => {
 const getEvents = async () => {
   const getEventPath = makePath('events')
   const getEventResponse = await request(getEventPath);
+}
+
+const deleteTicket = async (id) => {
+  const deleteTicketPath = makePath('tickets', id)
+  const deleteTicketResponse = await request(deleteTicketPath, 'DELETE');
 }
 
 const customReqest = async (method) => {
@@ -186,6 +190,3 @@ const deleteApiTest = async () => {
 // call tests
 // simpleApiTest()
 fullApiTest()
-// deleteApiTest()
-// getApiTest()
-// postApiTest()

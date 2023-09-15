@@ -1,6 +1,17 @@
 class TicketsController < ApplicationController
+  around_action :handle_exceptions
   before_action :set_ticket, only: %i[ show edit update destroy ]
-  # before_action :set_event, only: %i[ new ]
+
+  def handle_exceptions
+    begin
+      yield
+    rescue ActiveRecord::RecordNotFound => e
+      respond_to do |format|
+        format.html { head :not_found }
+        format.json { head :not_found }
+      end
+    end
+  end
 
   # GET /tickets or /tickets.json
   def index
@@ -75,10 +86,6 @@ class TicketsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_ticket
     @ticket = Ticket.find(params[:id])
-  end
-
-  def set_event
-    @event = Event.find(params[:event_id])
   end
 
   # Only allow a list of trusted parameters through.
