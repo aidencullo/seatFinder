@@ -31,5 +31,7 @@ Ticket.destroy_all
 Company.create
 Customer.create
 Venue.create
+Venue.create
+Venue.create
 Event.create(event_params)
 Ticket.create(ticket_params)

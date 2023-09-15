@@ -18,5 +18,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*other', to: 'application#not_found'
+  match '*path', to: 'application#not_found', via: :all
+  # match '*path', to: ->(env) { [404, {}, ['Not Found']] }, via: :all
 end

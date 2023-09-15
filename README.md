@@ -1,6 +1,5 @@
 ## Seatfinder
 ### version 1.0.0
-
 Manage your venue from the command line.
 
 ### Requests
@@ -14,7 +13,9 @@ Manage your venue from the command line.
 | method                   | endpoint     | body     | Description           |
 |--------------------------|--------------|----------|-----------------------|
 | GET                      | /events/:id  | No       | Retrieve event :id    |
+| GET                      | /events/     | No       | Retrieve all events   |
 | POST                     | /events/     | Yes      | Create event          |
+| PUT                      | /events/:id  | Yes      | Edit event            |
 | DELETE                   | /events/:id  | No       | Delete event          |
 
 ## Tickets
@@ -26,7 +27,9 @@ Manage your venue from the command line.
 | method                   | endpoint      | body     | Description           |
 |--------------------------|---------------|----------|-----------------------|
 | GET                      | /tickets/:id  | No       | Retrieve ticket :id   |
+| GET                      | /tickets/     | No       | Retrieve all tickets  |
 | POST                     | /tickets/     | Yes      | Create ticket         |
+| PUT                      | /tickets/:id  | Yes      | Edit ticket            |
 | DELETE                   | /tickets/:id  | No       | Delete ticket         |
 
 
@@ -40,67 +43,21 @@ Manage your venue from the command line.
 GET /events/:id
 ```
 
-returns event object :id
-
-```javascript
-{ 
-  event,
-  tickets,
-}
-```
+returns [event](datatypes) :id
 
 ### Retrieve an event
 
 ```plaintext
 POST /events
 ```
-returns new object
+returns [event](datatypes)
 
-```javascript
-{ 
-  event,
-  tickets,
-}
-```
 ### Delete an event
 
 ```plaintext
 DELETE /events/:id
 ```
 returns nothing
-
-```javascript
-
-```
-
-## Ticket
-
-### Retrieve a ticket
-
-```plaintext
-GET /tickets/:id
-```
-
-returns ticket object :id
-
-```javascript
-{ 
-  ticket,
-}
-```
-
-### Create a ticket
-
-```plaintext
-POST /tickets
-```
-returns new ticket object
-
-```javascript
-{ 
-  ticket,
-}
-```
 
 # Datatypes
 

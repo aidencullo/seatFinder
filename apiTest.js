@@ -12,7 +12,6 @@ const OPTIONS = {
   },
 }
 
-// raw http request
 const request = async (url, method = 'GET', data = undefined, customOptions
                        = OPTIONS) => {
                          console.log(`${method} ${url}`)
@@ -34,7 +33,6 @@ const request = async (url, method = 'GET', data = undefined, customOptions
                          return returnObj;
                        }
 
-//helpers
 const makePath = (...sub) => {
   return URL + '/' + sub.join('/')
 }
@@ -55,18 +53,55 @@ const parseJson = async (response) => {
 
 const fullApiTest = async () => {
   const eventId = await createEvent()
+  console.log()
+  console.log()
+  await getTickets()
+  console.log()
+  console.log()
   const ticketId = await buyTicket(eventId)
+  console.log()
+  console.log()
+  await getTicket(ticketId)
+  console.log()
+  console.log()
+  await getTickets()
+  console.log()
+  console.log()
+  await editTicket(eventId, ticketId)
+  console.log()
+  console.log()
+  await getTickets()
+  console.log()
+  console.log()
   await getEvent(eventId)
+  console.log()
+  console.log()
   await deleteTicket(ticketId)
+  console.log()
+  console.log()
   await deleteTicket(ticketId)
+  console.log()
+  console.log()
   await getEvents()
+  console.log()
+  console.log()
+  await editEvent(eventId)
+  console.log()
+  console.log()
+  await getEvents()
+  console.log()
+  console.log()
   await deleteEvent(eventId)
+  console.log()
+  console.log()
   await deleteEvent(eventId)
+  console.log()
+  console.log()
   await getEvents()
 }
 
 const simpleApiTest = async () => {
-  await getEvent(1)
+  await editTicket(1)
 }
 
 const createEvent = async () => {
@@ -93,9 +128,34 @@ const buyTicket = async (id) => {
   return buyTicketResponse.id
 }
 
+const editTicket = async (eventId, ticketId = 1, newTicket = {
+  customer_id : 1,
+  event_id: eventId,
+  name: 'aiden edited',
+  seat: 0,
+}) => {
+  const editTicketPath = makePath('tickets', ticketId)
+  const editTicketResponse = await request(editTicketPath, 'PUT', newTicket);
+  return editTicketResponse.id
+}
+
+const editEvent = async (eventId, newEvent = {
+  company_id : 1,
+  venue_id: 2,
+}) => {
+  const editEventPath = makePath('events', eventId)
+  const editEventResponse = await request(editEventPath, 'PUT', newEvent);
+  return editEventResponse.id
+}
+
 const getEvent = async (id) => {
   const getEventPath = makePath('events', id)
   const getEventResponse = await request(getEventPath);
+}
+
+const getTicket = async (id) => {
+  const getTicketPath = makePath('tickets', id)
+  const getTicketResponse = await request(getTicketPath);
 }
 
 const deleteEvent = async (id) => {
@@ -108,85 +168,15 @@ const getEvents = async () => {
   const getEventResponse = await request(getEventPath);
 }
 
+const getTickets = async () => {
+  const getTicketPath = makePath('tickets')
+  const getTicketResponse = await request(getTicketPath);
+}
+
 const deleteTicket = async (id) => {
   const deleteTicketPath = makePath('tickets', id)
   const deleteTicketResponse = await request(deleteTicketPath, 'DELETE');
 }
 
-const customReqest = async (method) => {
-  if (!['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS',
-        'CONNECT', 'TRACE'].includes(method)) {
-    throw new Error('method not recognized')
-  }
-  try {
-    const path = makePath()
-    const response = await request(path, method);
-    return 0
-  } catch(e) {
-    console.error(e)
-    return -1
-  }
-}
-
-// Test suites
-const getSuccessApiTest = async () => {
-  console.log('success requests')
-  const id = await createEvent()
-  await getEvent(id)
-  await getEvent(id)
-  await getEvent(id)
-  await getEvent(id)
-  await getEvent(id)
-}
-
-const getFailureApiTest = async () => {
-  console.log('failure tests')
-  await getEvent(-1)
-  await getEvent(100)
-  await getEvent('hi')
-}
-
-const getApiTest = async () => {
-  await getSuccessApiTest()
-  await getFailureApiTest()
-}
-
-const postSuccessApiTest = async () => {
-  console.log('success requests')
-  await createEvent()
-  await createEvent()
-  await createEvent()
-  await createEvent()
-}
-
-const postApiTest = async () => {
-  await postSuccessApiTest()
-}
-
-const deleteSuccessApiTest = async () => {
-  console.log('success requests')
-  const id = await createEvent()
-  const id2 = await createEvent()
-  await deleteEvent(id)
-  await deleteEvent(id2)
-}
-
-const deleteFailureApiTest = async () => {
-  console.log('failure tests')
-  await deleteEvent(1)
-  await deleteEvent(1)
-  await deleteEvent(1)
-  await deleteEvent(2)
-  await deleteEvent(0)
-  await deleteEvent(1)
-  await deleteEvent(1)
-}
-
-const deleteApiTest = async () => {
-  await deleteSuccessApiTest()
-  await deleteFailureApiTest()
-}
-
-// call tests
 // simpleApiTest()
 fullApiTest()
