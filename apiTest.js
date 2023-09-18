@@ -101,7 +101,7 @@ const fullApiTest = async () => {
 }
 
 const simpleApiTest = async () => {
-  await editTicket(1)
+  await deleteTicket(0)
 }
 
 const createEvent = async () => {

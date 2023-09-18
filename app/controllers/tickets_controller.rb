@@ -1,17 +1,5 @@
 class TicketsController < ApplicationController
-  around_action :handle_exceptions
   before_action :set_ticket, only: %i[ show edit update destroy ]
-
-  def handle_exceptions
-    begin
-      yield
-    rescue ActiveRecord::RecordNotFound => e
-      respond_to do |format|
-        format.html { head :not_found }
-        format.json { head :not_found }
-      end
-    end
-  end
 
   # GET /tickets or /tickets.json
   def index

@@ -1,17 +1,5 @@
 class EventsController < ApplicationController
-  around_action :handle_exceptions
   before_action :set_event, only: %i[ show edit update destroy buy_ticket]
-
-  def handle_exceptions
-    begin
-      yield
-    rescue ActiveRecord::RecordNotFound => e
-      respond_to do |format|
-        format.html { head :not_found }
-        format.json { head :not_found }
-      end
-    end
-  end
 
   # GET /events or /events.json
   def index
