@@ -63,10 +63,9 @@ class TicketsController < ApplicationController
   # DELETE /tickets/1 or /tickets/1.json
   def destroy
     @ticket.destroy
-
     respond_to do |format|
       format.html { redirect_to tickets_url, notice: "Ticket was successfully destroyed." }
-      format.json { head :no_content }
+      format.json { render json: @ticket, status: :ok }
     end
   end
 

@@ -13,12 +13,14 @@ class ApplicationController < ActionController::Base
     begin
       yield
     rescue ActiveRecord::RecordNotFound => e
-      head :not_found
+      render json: e.to_json, status: :not_found
     end
   end
 
   def not_found
-    head :not_found
+    render json: {
+             message: "page not found"
+           }, status: :not_found
   end
 end
 
