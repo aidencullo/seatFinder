@@ -34,8 +34,8 @@ class TicketsController < ApplicationController
 
   # POST /tickets or /tickets.json
   def create
-
-    @ticket = Ticket.create(ticket_params)    
+    @event = Event.find(params[:event_id])
+    @ticket = @event.tickets.create(ticket_params)    
     respond_to do |format|
       if @ticket.save
         format.html { redirect_to ticket_path(@ticket), notice: "Ticket was successfully created." }

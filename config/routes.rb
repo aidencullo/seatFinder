@@ -13,11 +13,13 @@ Rails.application.routes.draw do
 
   scope :api do
     scope :v1 do
-      resources :events
-      resources :tickets
+      resources :companies, shallow: true do
+        resources :events, shallow: true do
+          resources :tickets
+        end
+      end
     end
   end
 
   match '*path', to: 'application#not_found', via: :all
-  # match '*path', to: ->(env) { [404, {}, ['Not Found']] }, via: :all
 end
