@@ -7,9 +7,12 @@ class Event < ApplicationRecord
 
   accepts_nested_attributes_for :grid
 
-  after_initialize :init
+  before_validation :default_event
 
-  def init
+  def default_event
+    self.company_id ||= 1
+    self.venue_id ||= 1
     self.grid ||= build_grid
   end
+
 end
