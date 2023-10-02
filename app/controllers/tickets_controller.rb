@@ -3,7 +3,8 @@ class TicketsController < ApplicationController
 
   # GET /tickets or /tickets.json
   def index
-    @tickets = Ticket.all
+    @event = Event.find(params[:event_id])
+    @tickets = @event.tickets
   end
 
   # GET /tickets/1 or /tickets/1.json
@@ -77,6 +78,6 @@ class TicketsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def ticket_params
-    params.require(:ticket).permit(:customer_id, :event_id, :name, :seat)
+    params.require(:ticket).permit(:customer_id, :name, :seat)
   end
 end
