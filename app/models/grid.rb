@@ -7,17 +7,17 @@ class Grid < ApplicationRecord
   validates :rows, comparison: { greater_than: 0 }
   validates :cols, comparison: { greater_than: 0 }
 
-  def get_space(i, k)
-    space = self.spaces.where(position: self.get_index(i, k)).first
-  end
+  # def get_space(i, k)
+  #   space = self.spaces.where(position: self.get_index(i, k)).first
+  # end
 
-  def get_ticket(i, k)
-    ticket = self.event.tickets.where(seat: get_index(i, k)).first
-  end
+  # def get_ticket(i, k)
+  #   ticket = self.event.tickets.where(seat: get_index(i, k)).first
+  # end
 
-  def get_index(i, k)
-    return i * cols + k
-  end
+  # def get_index(i, k)
+  #   return i * cols + k
+  # end
 
   before_validation :default_grid
   

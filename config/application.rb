@@ -20,7 +20,7 @@ module SeatFinder
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.middleware.use Middleware::VerifyToken
+    # config.middleware.use Middleware::VerifyToken
     config.generators do |g|
       g.test_framework(
         :rspec,
