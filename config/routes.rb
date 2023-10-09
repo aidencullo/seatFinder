@@ -11,8 +11,8 @@ Rails.application.routes.draw do
     resources :events
   end
 
-  scope :api do
-    scope :v1 do
+  namespace :api do
+    namespace :v1 do
       resources :companies, shallow: true do
         resources :events, shallow: true do
           resources :tickets

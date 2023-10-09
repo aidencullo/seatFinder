@@ -1,4 +1,4 @@
-class CompaniesController < ApplicationController
+class Api::V1::CompaniesController < ApplicationController
   before_action :set_company, only: %i[ show edit update destroy ]
 
   # GET /companies or /companies.json
