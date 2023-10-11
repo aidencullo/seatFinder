@@ -1,4 +1,4 @@
-class TicketsController < ApplicationController
+class Api::V1::TicketsController < ApplicationController
   before_action :set_ticket, only: %i[ show edit update destroy ]
 
   # GET /tickets or /tickets.json

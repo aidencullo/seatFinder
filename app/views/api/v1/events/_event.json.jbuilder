@@ -1,4 +1,4 @@
 json.extract! event, :id
-              # :venue_id,
-              # :company_id
-# json.url event_url(event, format: :json)
+json.tickets @event.tickets do |ticket|
+  json.id ticket.id
+end
