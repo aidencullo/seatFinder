@@ -1,4 +1,4 @@
-class SpacesController < ApplicationController
+class Api::V1::SpacesController < ApplicationController
   before_action :set_space, only: %i[ show edit update destroy ]
 
   # GET /spaces or /spaces.json

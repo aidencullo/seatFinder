@@ -1,3 +1,3 @@
 class Space < ApplicationRecord
-  belongs_to :grid  
+  belongs_to :event
 end

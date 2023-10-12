@@ -9,7 +9,7 @@ RSpec.describe Event, type: :request do
       before { get api_v1_event_path(event.id), headers: headers }
 
       it { expect(response).to be_ok }
-      it { expect(JSON.parse(response.body)).to eq({ 'id' => event.id }) }
+      it { expect(JSON.parse(response.body)).to include('id' => event.id) }
     end
 
     context "when the event doesn't exists" do

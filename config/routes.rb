@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       resources :companies, shallow: true do
         resources :events, shallow: true do
           resources :tickets
+          resources :spaces
         end
       end
     end
