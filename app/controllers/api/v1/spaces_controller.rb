@@ -21,8 +21,8 @@ class Api::V1::SpacesController < ApplicationController
 
   # POST /spaces or /spaces.json
   def create
-    @space = Space.new(space_params)
-
+    @event = Event.find(params[:event_id])
+    @space = @event.spaces.build(space_params)
     respond_to do |format|
       if @space.save
         format.html { redirect_to space_url(@space), notice: "Space was successfully created." }
@@ -49,11 +49,11 @@ class Api::V1::SpacesController < ApplicationController
 
   # DELETE /spaces/1 or /spaces/1.json
   def destroy
-    @space.destroy
+    # @space.destroy
 
     respond_to do |format|
       format.html { redirect_to spaces_url, notice: "Space was successfully destroyed." }
-      format.json { head :no_content }
+      format.json { head :method_not_allowed }
     end
   end
 
@@ -65,6 +65,6 @@ class Api::V1::SpacesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def space_params
-      params.require(:space).permit(:available)
+      params.require(:space).permit(:position)
     end
 end

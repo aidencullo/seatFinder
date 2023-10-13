@@ -50,6 +50,7 @@ RSpec.describe Ticket, type: :request do
     
     context "when ticket is invalid" do
       let(:params) { { :ticket => { :customer_id => 0 } } }
+      # let(:params) { { :ticket => { :customer_id => 0 } } }
 
       it { expect(response).to be_unprocessable }
     end
