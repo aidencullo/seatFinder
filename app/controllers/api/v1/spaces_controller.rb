@@ -21,25 +21,30 @@ class Api::V1::SpacesController < ApplicationController
 
   # POST /spaces or /spaces.json
   def create
-    @event = Event.find(params[:event_id])
-    @space = @event.spaces.build(space_params)
     respond_to do |format|
-      if @space.save
-        format.html { redirect_to space_url(@space), notice: "Space was successfully created." }
-        format.json { render :show, status: :created, location: @space }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @space.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to spaces_url, notice: "Space was successfully destroyed." }
+      format.json { head :method_not_allowed }
     end
+    # @event = Event.find(params[:event_id])
+    # @space = @event.spaces.build(space_params)
+    # respond_to do |format|
+    #   if @space.save
+    #     format.html { redirect_to space_url(@space), notice: "Space was successfully created." }
+    #     format.json { render :show, status: :created, location: @space }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @space.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
-
+ 
   # PATCH/PUT /spaces/1 or /spaces/1.json
   def update
     respond_to do |format|
       if @space.update(space_params)
         format.html { redirect_to edit_event_url(@space.grid.event), notice: "Space was successfully updated." }
-        format.json { render :show, status: :ok, location: @space }
+        # format.json { render :show, status: :ok, location: @space }
+        format.json { render json: @space, status: :ok }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @space.errors, status: :unprocessable_entity }
@@ -65,6 +70,6 @@ class Api::V1::SpacesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def space_params
-      params.require(:space).permit(:position)
+      params.require(:space).permit(:position, :status)
     end
 end

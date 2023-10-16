@@ -75,4 +75,5 @@ RSpec.describe Event, type: :request do
       it { expect(response).to be_not_found }
     end
   end
+  # test for checking grid creation
 end

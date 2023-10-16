@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_13_180223) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_16_164553) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,11 +50,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_13_180223) do
   end
 
   create_table "spaces", force: :cascade do |t|
-    t.boolean "available"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "position", null: false
     t.bigint "event_id", null: false
+    t.string "status", null: false
     t.index ["event_id"], name: "index_spaces_on_event_id"
   end
 
