@@ -76,4 +76,12 @@ RSpec.describe Event, type: :request do
     end
   end
   # test for checking grid creation
+
+  describe "alter grid" do
+    let(:company) { create(:company) }
+
+    before { post api_v1_companies_path(event.id), headers: headers }
+
+    # it { expect(response).to be_ok }
+  end
 end

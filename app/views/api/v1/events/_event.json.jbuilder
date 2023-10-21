@@ -1,4 +1,7 @@
 json.extract! event, :id
-json.tickets @event.tickets do |ticket|
-  json.id ticket.id
+json.rows event.grid.rows
+json.cols event.grid.cols
+json.spaces @event.spaces do |space|
+  json.id space.id
+  json.status space.status
 end

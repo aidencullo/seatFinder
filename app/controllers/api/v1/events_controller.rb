@@ -5,11 +5,11 @@ class Api::V1::EventsController < ApplicationController
   def index
     @events = Event.all
   end
-  
+
   # GET /events/1 or /events/1.json
   def show
   end
-  
+
   # GET /events/new
   def new
     @event = Event.new
@@ -23,16 +23,19 @@ class Api::V1::EventsController < ApplicationController
   def create
     @company = Company.find(params[:company_id])
     @event = @company.events.create(event_params)
+
     respond_to do |format|
       if @event.save
         format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
-        format.json { render :show, status: :created, location: @event }
+        format.json { render @event, status: :created }
+        format.xml { render xml: @people }
       else
         format.html { redirect_to @company, alert: "Event could not
-  be created" } 
+  be created" }
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /events/1 or /events/1.json
@@ -69,5 +72,5 @@ class Api::V1::EventsController < ApplicationController
     params.require(:event).permit(:venue_id,
                                   :company_id, :grid_attributes => [:rows, :cols]
                                  )
-  end  
+  end
 end

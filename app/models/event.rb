@@ -14,6 +14,7 @@ class Event < ApplicationRecord
     self.company_id ||= 1
     self.venue_id ||= 1
     self.grid ||= build_grid
+    self.spaces.new(status: 'available', position: 1)
   end
 
 end
