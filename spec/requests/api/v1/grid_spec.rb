@@ -15,28 +15,39 @@ RSpec.describe Event, type: :request do
                    }
                  } }
   let(:edit_params) { {
-                   :event => {
-                     :grid_attributes => {
-                       :rows => 3,
-                       :cols => 2,
-                     },
-                   }
-                 } }
+                        :event => {
+                          :grid_attributes => {
+                            :rows => 3,
+                            :cols => 2,
+                          },
+                        }
+                      } }
   let(:space_params) { {
-                   :space => {
-                     :status => 'unavailable'
-                   }
-                 } }
+                         :space => {
+                           :status => 'unavailable'
+                         }
+                       } }
+
+  describe "create grid" do
+
+    before do
+      post api_v1_company_events_path(company.id), params: params, headers: headers
+    end
+    let(:response_json) { JSON.parse(response.body) }
+
+    it { expect(response).to be_created }
+    it { expect(response_json).to include('rows' => 2) }
+    it { expect(response_json).to include('cols' => 2) }
+    it do
+      expect(response_json['spaces'].size).to eq(4)
+    end
+  end
 
   describe "alter grid" do
 
     before do
       post api_v1_company_events_path(company.id), params: params, headers: headers
     end
-
-    it { expect(JSON.parse(response.body)).to include('rows' => 2) }
-    it { expect(JSON.parse(response.body)).to include('cols' => 2) }
-    it { expect(response).to be_created }
     it do
       event = JSON.parse(response.body)
       

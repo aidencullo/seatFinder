@@ -14,7 +14,14 @@ class Event < ApplicationRecord
     self.company_id ||= 1
     self.venue_id ||= 1
     self.grid ||= build_grid
-    self.spaces.new(status: 'available', position: 1)
+    # p self.grid
+    self.instantiate_spaces(self.grid.rows, self.grid.cols) if self.spaces.empty?
   end
 
+  def instantiate_spaces(rows, cols)
+    size = (cols * rows)
+    4.times do |i|
+      self.spaces.new(status: 'available', position: i + 1)
+    end
+  end
 end
