@@ -1,6 +1,9 @@
 require 'rails_helper'
+require_relative 'shared'
 
 RSpec.describe Event, type: :request do
+
+  
   let(:headers) { {'ACCEPT' => 'application/json'} }
   let(:venue) { create(:venue) }
   let(:company) { create(:company) }
@@ -27,35 +30,30 @@ RSpec.describe Event, type: :request do
                            :status => 'unavailable'
                          }
                        } }
+  let(:response_json) { JSON.parse(response.body) }
 
   describe "create grid" do
 
     before do
       post api_v1_company_events_path(company.id), params: params, headers: headers
     end
-    let(:response_json) { JSON.parse(response.body) }
 
     it { expect(response).to be_created }
     it { expect(response_json).to include('rows' => 2) }
     it { expect(response_json).to include('cols' => 2) }
-    it do
-      expect(response_json['spaces'].size).to eq(4)
-    end
+    it { expect(response_json['spaces'].size).to eq(4) }
   end
 
   describe "alter grid" do
 
     before do
-      post api_v1_company_events_path(company.id), params: params, headers: headers
-    end
-    it do
-      event = JSON.parse(response.body)
-      
-      put api_v1_event_path(event['id']), params: edit_params,
+      event = create(:event)
+      put api_v1_event_path(event), params: edit_params,
           headers: headers
-      
-      expect(JSON.parse(response.body)).to include('rows' => 3)
     end
+    
+    it_behaves_like "test", 'rows', 3
+    it_behaves_like "test", 'cols', 2
   end
 
   describe "toggle space availability" do
@@ -66,10 +64,7 @@ RSpec.describe Event, type: :request do
       @status = @event['spaces'][0]['status']
     end
 
-    it do
-      expect(@status).to eq('available')
-    end
-
+    it { expect(@status).to eq('available') }
     it do
       put api_v1_space_path(@event['spaces'][0]['id']), params: space_params, headers: headers
       @space = JSON.parse(response.body)
