@@ -4,127 +4,160 @@ Manage your venue from the command line.
 
 # Requests
 
+### Generallly in accordance with REST and [RoR routing conventions](https://guides.rubyonrails.org/routing.html)
+
 ## Events
 
-```plaintext
-/events
-```
-
-| method                   | endpoint     | body     | Description           |
-|--------------------------|--------------|----------|-----------------------|
-| GET                      | /events/:id  | No       | Retrieve event :id    |
-| GET                      | /events/     | No       | Retrieve all events   |
-| POST                     | /events/     | Yes      | Create event          |
-| PUT                      | /events/:id  | Yes      | Edit event            |
-| DELETE                   | /events/:id  | No       | Delete event          |
+| method | path                                               | controller            |
+|--------|----------------------------------------------------|-----------------------|
+| GET    | /api/v1/events/:event_id/tickets(.:format)         | api/v1/tickets#index  |
+| POST   | /api/v1/events/:event_id/tickets(.:format)         | api/v1/tickets#create |
+| GET    | /api/v1/events/:event_id/tickets/new(.:format)     | api/v1/tickets#new    |
+| GET    | /api/v1/events/:event_id/spaces(.:format)          | api/v1/spaces#index   |
+| POST   | /api/v1/events/:event_id/spaces(.:format)          | api/v1/spaces#create  |
+| GET    | /api/v1/events/:event_id/spaces/new(.:format)      | api/v1/spaces#new     |
+| GET    | /api/v1/companies/:company_id/events(.:format)     | api/v1/events#index   |
+| POST   | /api/v1/companies/:company_id/events(.:format)     | api/v1/events#create  |
+| GET    | /api/v1/companies/:company_id/events/new(.:format) | api/v1/events#new     |
+| GET    | /api/v1/events/:id/edit(.:format)                  | api/v1/events#edit    |
+| GET    | /api/v1/events/:id(.:format)                       | api/v1/events#show    |
+| PATCH  | /api/v1/events/:id(.:format)                       | api/v1/events#update  |
+| PUT    | /api/v1/events/:id(.:format)                       | api/v1/events#update  |
+| DELETE | /api/v1/events/:id(.:format)                       | api/v1/events#destroy |
 
 ## Tickets
 
-```plaintext
-/tickets
-```
+| method | path                                             | controller             |
+|--------|--------------------------------------------------|------------------------|
+| GET    | /api/v1/tickets/:ticket_id/tickets(.:format)     | api/v1/tickets#index   |
+| POST   | /api/v1/tickets/:ticket_id/tickets(.:format)     | api/v1/tickets#create  |
+| GET    | /api/v1/tickets/:ticket_id/tickets/new(.:format) | api/v1/tickets#new     |
+| GET    | /api/v1/tickets/:ticket_id/spaces(.:format)      | api/v1/spaces#index    |
+| POST   | /api/v1/tickets/:ticket_id/spaces(.:format)      | api/v1/spaces#create   |
+| GET    | /api/v1/tickets/:ticket_id/spaces/new(.:format)  | api/v1/spaces#new      |
+| GET    | /api/v1/events/:event_id/tickets(.:format)       | api/v1/tickets#index   |
+| POST   | /api/v1/events/:event_id/tickets(.:format)       | api/v1/tickets#create  |
+| GET    | /api/v1/events/:event_id/tickets/new(.:format)   | api/v1/tickets#new     |
+| GET    | /api/v1/tickets/:id/edit(.:format)               | api/v1/tickets#edit    |
+| GET    | /api/v1/tickets/:id(.:format)                    | api/v1/tickets#show    |
+| PATCH  | /api/v1/tickets/:id(.:format)                    | api/v1/tickets#update  |
+| PUT    | /api/v1/tickets/:id(.:format)                    | api/v1/tickets#update  |
+| DELETE | /api/v1/tickets/:id(.:format)                    | api/v1/tickets#destroy |
 
-| method                   | endpoint      | body     | Description           |
-|--------------------------|---------------|----------|-----------------------|
-| GET                      | /tickets/:id  | No       | Retrieve ticket :id   |
-| GET                      | /tickets/     | No       | Retrieve all tickets  |
-| POST                     | /tickets/     | Yes      | Create ticket         |
-| PUT                      | /tickets/:id  | Yes      | Edit ticket           |
-| DELETE                   | /tickets/:id  | No       | Delete ticket         |
 
-## Examples
+## Spaces
 
-### get an event
-```plaintext
-GET /events/1
-```
+| method | path                                          | controller            |
+|--------|-----------------------------------------------|-----------------------|
+| GET    | /api/v1/spaces/:space_id/spaces(.:format)     | api/v1/spaces#index   |
+| POST   | /api/v1/spaces/:space_id/spaces(.:format)     | api/v1/spaces#create  |
+| GET    | /api/v1/spaces/:space_id/spaces/new(.:format) | api/v1/spaces#new     |
+| GET    | /api/v1/spaces/:space_id/spaces(.:format)     | api/v1/spaces#index   |
+| POST   | /api/v1/spaces/:space_id/spaces(.:format)     | api/v1/spaces#create  |
+| GET    | /api/v1/spaces/:space_id/spaces/new(.:format) | api/v1/spaces#new     |
+| GET    | /api/v1/events/:event_id/spaces(.:format)     | api/v1/spaces#index   |
+| POST   | /api/v1/events/:event_id/spaces(.:format)     | api/v1/spaces#create  |
+| GET    | /api/v1/events/:event_id/spaces/new(.:format) | api/v1/spaces#new     |
+| GET    | /api/v1/spaces/:id/edit(.:format)             | api/v1/spaces#edit    |
+| GET    | /api/v1/spaces/:id(.:format)                  | api/v1/spaces#show    |
+| PATCH  | /api/v1/spaces/:id(.:format)                  | api/v1/spaces#update  |
+| PUT    | /api/v1/spaces/:id(.:format)                  | api/v1/spaces#update  |
+| DELETE | /api/v1/spaces/:id(.:format)                  | api/v1/spaces#destroy |
 
-```plaintext
-curl http://localhost:3000/api/v1/events/1 \
-    -H "token: 8b36056f81e2df855c7a61fd6cc7bee5038380cb5ec39b77b2d389fe77556202" \
-    -H "accept: application/json"
-```
 
-### delete a ticket
-```plaintext
-DELETE /ticket/1
-```
+<!-- ## Examples -->
 
-```plaintext
+<!-- ### get an event -->
+<!-- ```plaintext -->
+<!-- GET /events/1 -->
+<!-- ``` -->
 
-curl http://localhost:3000/api/v1/tickets/1 \
-    -X DELETE \
-    -H "accept: application/json" \
-    -H "token: 8b36056f81e2df855c7a61fd6cc7bee5038380cb5ec39b77b2d389fe77556202" \
+<!-- ```plaintext -->
+<!-- curl http://localhost:3000/api/v1/events/1 \ -->
+<!--     -H "token: 8b36056f81e2df855c7a61fd6cc7bee5038380cb5ec39b77b2d389fe77556202" \ -->
+<!--     -H "accept: application/json" -->
+<!-- ``` -->
 
-```
+<!-- ### delete a ticket -->
+<!-- ```plaintext -->
+<!-- DELETE /ticket/1 -->
+<!-- ``` -->
 
-### create an event
-```plaintext
-POST /events
-```
+<!-- ```plaintext -->
 
-```plaintext
-curl \
-    -X POST \
-    -H "Content-Type: application/json" \
-    -H "accept: application/json" \
-    -H "token: 8b36056f81e2df855c7a61fd6cc7bee5038380cb5ec39b77b2d389fe77556202" \
-    -d '{"company_id":"1", "venue_id":"1", "grid_attributes": {"rows":"2",
-"cols": "2"}}' \
-    http://localhost:3000/api/v1/events
-```
+<!-- curl http://localhost:3000/api/v1/tickets/1 \ -->
+<!--     -X DELETE \ -->
+<!--     -H "accept: application/json" \ -->
+<!--     -H "token: 8b36056f81e2df855c7a61fd6cc7bee5038380cb5ec39b77b2d389fe77556202" \ -->
 
-# Responses
+<!-- ``` -->
 
-## Events
+<!-- ### create an event -->
+<!-- ```plaintext -->
+<!-- POST /events -->
+<!-- ``` -->
 
-### Retrieve an event
+<!-- ```plaintext -->
+<!-- curl \ -->
+<!--     -X POST \ -->
+<!--     -H "Content-Type: application/json" \ -->
+<!--     -H "accept: application/json" \ -->
+<!--     -H "token: 8b36056f81e2df855c7a61fd6cc7bee5038380cb5ec39b77b2d389fe77556202" \ -->
+<!--     -d '{"company_id":"1", "venue_id":"1", "grid_attributes": {"rows":"2", -->
+<!-- "cols": "2"}}' \ -->
+<!--     http://localhost:3000/api/v1/events -->
+<!-- ``` -->
 
-```plaintext
-GET /events/:id
-```
+<!-- # Responses -->
 
-returns [event](#datatypes) :id
+<!-- ## Events -->
 
-### Create an event
+<!-- ### Retrieve an event -->
 
-```plaintext
-POST /events
-```
-returns [event](#datatypes) created
+<!-- ```plaintext -->
+<!-- GET /events/:id -->
+<!-- ``` -->
 
-### Delete an event
+<!-- returns [event](#datatypes) :id -->
 
-```plaintext
-DELETE /events/:id
-```
-returns nothing
+<!-- ### Create an event -->
 
-# Datatypes
+<!-- ```plaintext -->
+<!-- POST /events -->
+<!-- ``` -->
+<!-- returns [event](#datatypes) created -->
 
-## Event
+<!-- ### Delete an event -->
 
-```javascript
-{
-    id,
-    venue_id,
-    company_id,
-    created_at,
-    updated_at,
-    tickets,
-}
-```
+<!-- ```plaintext -->
+<!-- DELETE /events/:id -->
+<!-- ``` -->
+<!-- returns nothing -->
 
-## Ticket
-```javascript
-{
-    id,
-    customer_id,
-    event_id,
-    created_at,
-    updated_at,
-    seat,
-    name,
-}
-```
+<!-- # Datatypes -->
+
+<!-- ## Event -->
+
+<!-- ```javascript -->
+<!-- { -->
+<!--     id, -->
+<!--     venue_id, -->
+<!--     company_id, -->
+<!--     created_at, -->
+<!--     updated_at, -->
+<!--     tickets, -->
+<!-- } -->
+<!-- ``` -->
+
+<!-- ## Ticket -->
+<!-- ```javascript -->
+<!-- { -->
+<!--     id, -->
+<!--     customer_id, -->
+<!--     event_id, -->
+<!--     created_at, -->
+<!--     updated_at, -->
+<!--     seat, -->
+<!--     name, -->
+<!-- } -->
+<!-- ``` -->

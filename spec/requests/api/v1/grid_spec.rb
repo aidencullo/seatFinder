@@ -1,6 +1,7 @@
 require 'rails_helper'
 require_relative 'shared'
 
+$count = 0
 RSpec.describe Event, type: :request do
 
   
@@ -63,8 +64,11 @@ RSpec.describe Event, type: :request do
       @event = JSON.parse(response.body)
       @status = @event['spaces'][0]['status']
     end
-
-    it { expect(@status).to eq('available') }
+    
+    it do @event['spaces'].each do |space|
+            expect(space['status']).to eq('available')
+          end
+    end
     it do
       put api_v1_space_path(@event['spaces'][0]['id']), params: space_params, headers: headers
       @space = JSON.parse(response.body)
