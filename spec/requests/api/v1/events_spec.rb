@@ -76,11 +76,22 @@ RSpec.describe Event, type: :request do
     end
   end
 
-  describe "GET    /api/v1/companies/:company_id/events(.:format)" do
-    let(:company) { create(:company) }
+  describe "PATCH    /api/v1/events/:id" do
+    let(:event) { create(:event) }
+    before { patch api_v1_event_path(event.id), params: params, headers: headers }
+
+    context "when event is valid" do
+      let(:venue) { create(:venue) }
+      let(:params) { { :event => { :venue_id => venue.id } } }
+
+      it { expect(response).to be_ok }
+    end
     
-    it do
-        get api_v1_company_events_path(company.id), headers: headers
+    context "when event is invalid" do
+      let(:params) { { :event => { :venue_id => 0 } } }
+
+      it { expect(response).to be_unprocessable }
     end
   end
+
 end

@@ -1,10 +1,19 @@
 # Seatfinder
+
 ## version 1.0.0
-Manage your venue from the command line.
+
+Manage your event from the command line.
 
 # Requests
 
-### Generallly in accordance with REST and [RoR routing conventions](https://guides.rubyonrails.org/routing.html)
+### Generally in accordance with REST and [RoR routing conventions](https://guides.rubyonrails.org/routing.html)
+
+### please use the following headers:
+```javascript
+{
+    'ACCEPT' => 'application/json'
+}
+```
 
 ## Events
 
@@ -39,37 +48,15 @@ Manage your venue from the command line.
 | PUT    | /api/v1/spaces/:id(.:format)              | api/v1/spaces#update  |
 | DELETE | /api/v1/spaces/:id(.:format)              | api/v1/spaces#destroy |
 
-<!-- ## Examples -->
+# Datatypes
 
-<!-- ### get an event -->
-<!-- ```plaintext -->
-<!-- GET /events/1 -->
-<!-- ``` -->
+## Event
 
-<!-- ```plaintext -->
-<!-- curl http://localhost:3000/api/v1/events/1 \ -->
-<!--     -H "token: 8b36056f81e2df855c7a61fd6cc7bee5038380cb5ec39b77b2d389fe77556202" \ -->
-<!--     -H "accept: application/json" -->
-<!-- ``` -->
-
-<!-- ### delete a ticket -->
-<!-- ```plaintext -->
-<!-- DELETE /ticket/1 -->
-<!-- ``` -->
-
-<!-- ```plaintext -->
-
-<!-- curl http://localhost:3000/api/v1/tickets/1 \ -->
-<!--     -X DELETE \ -->
-<!--     -H "accept: application/json" \ -->
-<!--     -H "token: 8b36056f81e2df855c7a61fd6cc7bee5038380cb5ec39b77b2d389fe77556202" \ -->
-
-<!-- ``` -->
-
-<!-- ### create an event -->
-<!-- ```plaintext -->
-<!-- POST /events -->
-<!-- ``` -->
+```javascript
+{
+    venue_id,
+}
+```
 
 <!-- ```plaintext -->
 <!-- curl \ -->
@@ -80,58 +67,4 @@ Manage your venue from the command line.
 <!--     -d '{"company_id":"1", "venue_id":"1", "grid_attributes": {"rows":"2", -->
 <!-- "cols": "2"}}' \ -->
 <!--     http://localhost:3000/api/v1/events -->
-<!-- ``` -->
-
-<!-- # Responses -->
-
-<!-- ## Events -->
-
-<!-- ### Retrieve an event -->
-
-<!-- ```plaintext -->
-<!-- GET /events/:id -->
-<!-- ``` -->
-
-<!-- returns [event](#datatypes) :id -->
-
-<!-- ### Create an event -->
-
-<!-- ```plaintext -->
-<!-- POST /events -->
-<!-- ``` -->
-<!-- returns [event](#datatypes) created -->
-
-<!-- ### Delete an event -->
-
-<!-- ```plaintext -->
-<!-- DELETE /events/:id -->
-<!-- ``` -->
-<!-- returns nothing -->
-
-<!-- # Datatypes -->
-
-<!-- ## Event -->
-
-<!-- ```javascript -->
-<!-- { -->
-<!--     id, -->
-<!--     venue_id, -->
-<!--     company_id, -->
-<!--     created_at, -->
-<!--     updated_at, -->
-<!--     tickets, -->
-<!-- } -->
-<!-- ``` -->
-
-<!-- ## Ticket -->
-<!-- ```javascript -->
-<!-- { -->
-<!--     id, -->
-<!--     customer_id, -->
-<!--     event_id, -->
-<!--     created_at, -->
-<!--     updated_at, -->
-<!--     seat, -->
-<!--     name, -->
-<!-- } -->
 <!-- ``` -->
