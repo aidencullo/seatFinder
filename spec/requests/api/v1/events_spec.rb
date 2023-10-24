@@ -76,8 +76,11 @@ RSpec.describe Event, type: :request do
     end
   end
 
-  describe "DELETE    /api/v1/events/:id" do
+  describe "GET    /api/v1/companies/:company_id/events(.:format)" do
+    let(:company) { create(:company) }
+    
     it do
+        get api_v1_company_events_path(company.id), headers: headers
     end
   end
 end

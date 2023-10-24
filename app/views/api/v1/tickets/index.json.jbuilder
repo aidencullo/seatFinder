@@ -1,1 +1,1 @@
-json.array! @tickets, partial: "tickets/ticket", as: :ticket
+json.array! @tickets, partial: "api/v1/tickets/ticket"

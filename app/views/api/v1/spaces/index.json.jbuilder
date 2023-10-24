@@ -1,1 +1,1 @@
-json.array! @spaces, partial: "spaces/space", as: :space
+json.array! @spaces, partial: "api/v1/spaces/space", as: :space

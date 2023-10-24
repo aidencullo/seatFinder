@@ -104,4 +104,12 @@ RSpec.describe Ticket, type: :request do
       it { expect(JSON.parse(response.body)["tickets"]).not_to include({"id" => @ticket_id}) }
     end
   end
+
+  describe "GET    /api/v1/events/:event_id/tickets(.:format)" do
+    let(:event) { create(:event) }
+    
+    it do
+        get api_v1_event_tickets_path(event.id), headers: headers
+    end
+  end  
 end

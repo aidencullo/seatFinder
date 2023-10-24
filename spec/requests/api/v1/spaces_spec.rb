@@ -68,4 +68,14 @@ RSpec.describe Space, type: :request do
       it { expect(response).to be_method_not_allowed }
     end
   end
+
+
+  describe "GET    /api/v1/events/:event_id/spaces(.:format)" do
+    let(:event) { create(:event) }
+    
+    it do
+        get api_v1_event_spaces_path(event.id), headers: headers
+    end
+  end  
+  
 end
