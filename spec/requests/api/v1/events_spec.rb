@@ -75,13 +75,9 @@ RSpec.describe Event, type: :request do
       it { expect(response).to be_not_found }
     end
   end
-  # test for checking grid creation
 
-  describe "alter grid" do
-    let(:company) { create(:company) }
-
-    before { post api_v1_companies_path(event.id), headers: headers }
-
-    # it { expect(response).to be_ok }
+  describe "DELETE    /api/v1/events/:id" do
+    it do
+    end
   end
 end

@@ -10,16 +10,8 @@ Manage your venue from the command line.
 
 | method | path                                               | controller            |
 |--------|----------------------------------------------------|-----------------------|
-| GET    | /api/v1/events/:event_id/tickets(.:format)         | api/v1/tickets#index  |
-| POST   | /api/v1/events/:event_id/tickets(.:format)         | api/v1/tickets#create |
-| GET    | /api/v1/events/:event_id/tickets/new(.:format)     | api/v1/tickets#new    |
-| GET    | /api/v1/events/:event_id/spaces(.:format)          | api/v1/spaces#index   |
-| POST   | /api/v1/events/:event_id/spaces(.:format)          | api/v1/spaces#create  |
-| GET    | /api/v1/events/:event_id/spaces/new(.:format)      | api/v1/spaces#new     |
 | GET    | /api/v1/companies/:company_id/events(.:format)     | api/v1/events#index   |
 | POST   | /api/v1/companies/:company_id/events(.:format)     | api/v1/events#create  |
-| GET    | /api/v1/companies/:company_id/events/new(.:format) | api/v1/events#new     |
-| GET    | /api/v1/events/:id/edit(.:format)                  | api/v1/events#edit    |
 | GET    | /api/v1/events/:id(.:format)                       | api/v1/events#show    |
 | PATCH  | /api/v1/events/:id(.:format)                       | api/v1/events#update  |
 | PUT    | /api/v1/events/:id(.:format)                       | api/v1/events#update  |
@@ -27,43 +19,25 @@ Manage your venue from the command line.
 
 ## Tickets
 
-| method | path                                             | controller             |
-|--------|--------------------------------------------------|------------------------|
-| GET    | /api/v1/tickets/:ticket_id/tickets(.:format)     | api/v1/tickets#index   |
-| POST   | /api/v1/tickets/:ticket_id/tickets(.:format)     | api/v1/tickets#create  |
-| GET    | /api/v1/tickets/:ticket_id/tickets/new(.:format) | api/v1/tickets#new     |
-| GET    | /api/v1/tickets/:ticket_id/spaces(.:format)      | api/v1/spaces#index    |
-| POST   | /api/v1/tickets/:ticket_id/spaces(.:format)      | api/v1/spaces#create   |
-| GET    | /api/v1/tickets/:ticket_id/spaces/new(.:format)  | api/v1/spaces#new      |
-| GET    | /api/v1/events/:event_id/tickets(.:format)       | api/v1/tickets#index   |
-| POST   | /api/v1/events/:event_id/tickets(.:format)       | api/v1/tickets#create  |
-| GET    | /api/v1/events/:event_id/tickets/new(.:format)   | api/v1/tickets#new     |
-| GET    | /api/v1/tickets/:id/edit(.:format)               | api/v1/tickets#edit    |
-| GET    | /api/v1/tickets/:id(.:format)                    | api/v1/tickets#show    |
-| PATCH  | /api/v1/tickets/:id(.:format)                    | api/v1/tickets#update  |
-| PUT    | /api/v1/tickets/:id(.:format)                    | api/v1/tickets#update  |
-| DELETE | /api/v1/tickets/:id(.:format)                    | api/v1/tickets#destroy |
-
+| method | path                                       | controller             |
+|--------|--------------------------------------------|------------------------|
+| GET    | /api/v1/events/:event_id/tickets(.:format) | api/v1/tickets#index   |
+| POST   | /api/v1/events/:event_id/tickets(.:format) | api/v1/tickets#create  |
+| GET    | /api/v1/tickets/:id(.:format)              | api/v1/tickets#show    |
+| PATCH  | /api/v1/tickets/:id(.:format)              | api/v1/tickets#update  |
+| PUT    | /api/v1/tickets/:id(.:format)              | api/v1/tickets#update  |
+| DELETE | /api/v1/tickets/:id(.:format)              | api/v1/tickets#destroy |
 
 ## Spaces
 
-| method | path                                          | controller            |
-|--------|-----------------------------------------------|-----------------------|
-| GET    | /api/v1/spaces/:space_id/spaces(.:format)     | api/v1/spaces#index   |
-| POST   | /api/v1/spaces/:space_id/spaces(.:format)     | api/v1/spaces#create  |
-| GET    | /api/v1/spaces/:space_id/spaces/new(.:format) | api/v1/spaces#new     |
-| GET    | /api/v1/spaces/:space_id/spaces(.:format)     | api/v1/spaces#index   |
-| POST   | /api/v1/spaces/:space_id/spaces(.:format)     | api/v1/spaces#create  |
-| GET    | /api/v1/spaces/:space_id/spaces/new(.:format) | api/v1/spaces#new     |
-| GET    | /api/v1/events/:event_id/spaces(.:format)     | api/v1/spaces#index   |
-| POST   | /api/v1/events/:event_id/spaces(.:format)     | api/v1/spaces#create  |
-| GET    | /api/v1/events/:event_id/spaces/new(.:format) | api/v1/spaces#new     |
-| GET    | /api/v1/spaces/:id/edit(.:format)             | api/v1/spaces#edit    |
-| GET    | /api/v1/spaces/:id(.:format)                  | api/v1/spaces#show    |
-| PATCH  | /api/v1/spaces/:id(.:format)                  | api/v1/spaces#update  |
-| PUT    | /api/v1/spaces/:id(.:format)                  | api/v1/spaces#update  |
-| DELETE | /api/v1/spaces/:id(.:format)                  | api/v1/spaces#destroy |
-
+| method | path                                      | controller            |
+|--------|-------------------------------------------|-----------------------|
+| GET    | /api/v1/events/:event_id/spaces(.:format) | api/v1/spaces#index   |
+| POST   | /api/v1/events/:event_id/spaces(.:format) | api/v1/spaces#create  |
+| GET    | /api/v1/spaces/:id(.:format)              | api/v1/spaces#show    |
+| PATCH  | /api/v1/spaces/:id(.:format)              | api/v1/spaces#update  |
+| PUT    | /api/v1/spaces/:id(.:format)              | api/v1/spaces#update  |
+| DELETE | /api/v1/spaces/:id(.:format)              | api/v1/spaces#destroy |
 
 <!-- ## Examples -->
 
