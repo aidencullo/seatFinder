@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'companies#example'
+  root 'api/v1/events#show', :id => 1
 
   post '/events/:id', to: 'events#buy_ticket'
   post '/tickets/test', to: 'tickets#test', as: 'buy_ticket'

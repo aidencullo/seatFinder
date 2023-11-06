@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   around_action :handle_exceptions
 
   def set_headers
-    response.headers['Content-Type'] = 'application/json'
+    # response.headers['Content-Type'] = 'application/json'
   end
   
   def handle_exceptions

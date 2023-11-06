@@ -4,10 +4,12 @@ class Api::V1::EventsController < ApplicationController
   # GET /events or /events.json
   def index
     @events = Event.all
+    # p request.env["HTTP_ACCEPT"]
   end
 
   # GET /events/1 or /events/1.json
   def show
+    render layout: false
   end
 
   # GET /events/new
@@ -19,24 +21,24 @@ class Api::V1::EventsController < ApplicationController
   def edit
   end
 
-  # POST /events or /events.json
-  def create
-    @company = Company.find(params[:company_id])
-    @event = @company.events.create(event_params)
+  # # POST /events or /events.json
+  # def create
+  #   @company = Company.find(params[:company_id])
+  #   @event = @company.events.create(event_params)
 
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
-        format.json { render @event, status: :created }
-        format.xml { render xml: @people }
-      else
-        format.html { redirect_to @company, alert: "Event could not
-  be created" }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
-    end
+  #   respond_to do |format|
+  #     if @event.save
+  #       format.html { redirect_to event_url(@event), notice: "Event was successfully created." }
+  #       format.json { render @event, status: :created }
+  #       format.xml { render xml: @people }
+  #     else
+  #       format.html { redirect_to @company, alert: "Event could not
+  # be created" }
+  #       format.json { render json: @event.errors, status: :unprocessable_entity }
+  #     end
+  #   end
 
-  end
+  # end
 
   # PATCH/PUT /events/1 or /events/1.json
   def update
