@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
   root 'api/v1/events#show', :id => 1
 
   post '/events/:id', to: 'events#buy_ticket'

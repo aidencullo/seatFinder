@@ -82,3 +82,5 @@ gem "tailwindcss-rails", "~> 2.0"
 
 gem "view_component"
 gem 'simplecov', require: false, group: :test
+
+gem 'rswag'
