@@ -1,5 +1,6 @@
 class Api::V1::EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy buy_ticket]
+  layout "alternate"
 
   # GET /events or /events.json
   def index
@@ -9,7 +10,6 @@ class Api::V1::EventsController < ApplicationController
 
   # GET /events/1 or /events/1.json
   def show
-    render layout: false
   end
 
   # GET /events/new
